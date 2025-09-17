@@ -1,0 +1,176 @@
+{
+  "site_info": {
+    "title": "Neuroscape Imaging Core Wiki",
+    "description": "MRI Scanner Operations, Equipment Guides, and Troubleshooting Resources",
+    "version": "1.0",
+    "created": "2025-09-10"
+  },
+  "navigation": {
+    "main_menu": [
+      {
+        "category": "Equipment Guides",
+        "icon": "📋",
+        "description": "Technical guides for MRI equipment and peripherals",
+        "pages": [
+          {
+            "title": "fORP System",
+            "file": "fORP - Neuroscape - Wiki@UCSF.html",
+            "description": "Fiber-optic response pad system for fMRI experiments",
+            "images": [
+              "IMG_8402.JPG",
+              "IMG_8403.JPG",
+              "IMG_8404.JPG",
+              "IMG_8405.JPG",
+              "PeripheralsfORP_autoconfigure.png",
+              "PeripheralsfORP_buttonbox.png",
+              "PeripheralsfORP_connections.png",
+              "PeripheralsfORP_fORP.png",
+              "PeripheralsfORP_fibreopticbundle.png",
+              "PeripheralsfORP_responsedevices.png"
+            ]
+          },
+          {
+            "title": "MRGlasses",
+            "file": "MRGlasses - Neuroscape - Wiki@UCSF.html",
+            "description": "Vision correction system for MRI scanning",
+            "images": [
+              "MRGlasses_unit.jpg",
+              "MRGlasses_eyechart.jpg"
+            ]
+          },
+          {
+            "title": "Audio Systems",
+            "file": "Siemens Audio Systems Guide - Neuroscape - Wiki@UCSF.html",
+            "description": "Siemens MRI audio system setup and configuration",
+            "images": [
+              "Siemens-Headphon_20160420_111118Minimalist-Desig.jpg",
+              "SiemensAudio_Diagram.jpg"
+            ]
+          },
+          {
+            "title": "NNL Display System",
+            "file": "NNL - Neuroscape - Wiki@UCSF.html",
+            "description": "Nordic NeuroLab visual presentation system",
+            "images": [
+              "lcd1.jpg"
+            ]
+          }
+        ]
+      },
+      {
+        "category": "Operating Procedures",
+        "icon": "⚙️",
+        "description": "Standard operating procedures for the MRI scanner",
+        "pages": [
+          {
+            "title": "Scanner Startup & Shutdown",
+            "file": "Prisma Reboot Startup but do not Leave Shutdown - Neuroscape - Wiki@UCSF.html",
+            "description": "Proper procedures for starting and shutting down the Prisma scanner",
+            "images": [
+              "NeuroScape_Web_20161101_143930NIC_Reload.JPG",
+              "NeuroScape_Web_20161101_143936NIC_Reload.JPG",
+              "NeuroScape_Web_20161101_143947NIC_Reload.JPG",
+              "Screen Shot 2016-11-01 at 3.53.15 PM.png",
+              "Screen Shot 2016-11-01 at 4.00(1).06 PM.png",
+              "Screen Shot 2016-11-01 at 4.00.06 PM.png"
+            ]
+          },
+          {
+            "title": "DICOM Transfer",
+            "file": "DICOM Transfer Guide - Neuroscape - Wiki@UCSF.html",
+            "description": "How to transfer DICOM images from the scanner"
+          },
+          {
+            "title": "Filming at the NIC",
+            "file": "Filmimg at the NIC - Neuroscape - Wiki@UCSF.html",
+            "description": "Guidelines for filming and photography in the imaging center"
+          },
+          {
+            "title": "Scanner Lists",
+            "file": "Neuroscape Scanner Lists - Neuroscape - Wiki@UCSF.html",
+            "description": "Important checklists and reference lists for scanner operations"
+          }
+        ]
+      },
+      {
+        "category": "Troubleshooting",
+        "icon": "🔧",
+        "description": "Solutions for common problems and issues",
+        "pages": [
+          {
+            "title": "Scanner Troubleshooting",
+            "file": "Scanner Troubleshooting Guide - Neuroscape - Wiki@UCSF.html",
+            "description": "Common scanner issues and their solutions"
+          },
+          {
+            "title": "fMRI Equipment Issues",
+            "file": "fMRI Equipment Troubleshooting - Neuroscape - Wiki@UCSF.html",
+            "description": "Troubleshooting guide for fMRI peripheral equipment"
+          }
+        ]
+      },
+      {
+        "category": "Resources",
+        "icon": "📚",
+        "description": "Additional resources and reference materials",
+        "pages": [
+          {
+            "title": "Child MRI Preparation",
+            "file": "Child MRI prep video and scanner sounds and tips - Neuroscape - Wiki@UCSF.html",
+            "description": "Videos and tips for preparing children for MRI scans",
+            "external_links": [
+              {
+                "title": "MRI Scanner Sounds",
+                "url": "http://bmap.ucla.edu/_media/ScannerNoises_Email_wASL.mp3",
+                "type": "audio"
+              },
+              {
+                "title": "UCSF Child MRI Preparation Video",
+                "url": "https://radiology.ucsf.edu/patient-care/for-patients/video/ucsf-radiology-getting-children-ready-mri",
+                "type": "video"
+              }
+            ]
+          },
+          {
+            "title": "Imaging Core Overview",
+            "file": "Neuroscape Imaging Core UCSF - Neuroscape - Wiki@UCSF.html",
+            "description": "General information about the Neuroscape Imaging Core facility"
+          }
+        ]
+      }
+    ],
+    "quick_links": [
+      {
+        "title": "Scanner Startup Procedure",
+        "file": "Prisma Reboot Startup but do not Leave Shutdown - Neuroscape - Wiki@UCSF.html",
+        "priority": "high"
+      },
+      {
+        "title": "Scanner Troubleshooting",
+        "file": "Scanner Troubleshooting Guide - Neuroscape - Wiki@UCSF.html",
+        "priority": "high"
+      },
+      {
+        "title": "DICOM Transfer",
+        "file": "DICOM Transfer Guide - Neuroscape - Wiki@UCSF.html",
+        "priority": "high"
+      },
+      {
+        "title": "fORP Setup",
+        "file": "fORP - Neuroscape - Wiki@UCSF.html",
+        "priority": "medium"
+      }
+    ]
+  },
+  "contact_info": {
+    "facility": "Neuroscape Imaging Core",
+    "institution": "University of California, San Francisco",
+    "department": "Neuroscape Center"
+  },
+  "search_keywords": {
+    "equipment": ["fORP", "MRGlasses", "Audio", "NNL", "Nordic NeuroLab", "Siemens"],
+    "procedures": ["startup", "shutdown", "reboot", "DICOM", "transfer", "filming"],
+    "troubleshooting": ["error", "problem", "issue", "fix", "solution", "troubleshoot"],
+    "scanner": ["Prisma", "MRI", "fMRI", "Siemens", "3T"]
+  }
+}

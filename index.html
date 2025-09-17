@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neuroscape Imaging Core - MRI Operations Hub</title>
+    <meta name="description" content="Advanced MRI scanner operations, equipment guides, and troubleshooting resources for the Neuroscape Imaging Core at UCSF">
+    
+    <!-- Preconnect to external resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <style>
+        /* Page-specific styles */
+        .hero-section {
+            position: relative;
+            padding: 120px 0 60px;
+            text-align: center;
+            overflow: hidden;
+        }
+        
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--color-primary-blue), var(--color-electric-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            animation: fadeIn 1s ease;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--color-text-secondary);
+            margin-bottom: 2rem;
+            animation: fadeIn 1s ease 0.2s backwards;
+        }
+        
+        .quick-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            text-align: center;
+            animation: fadeIn 1s ease 0.4s backwards;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--color-primary-blue);
+        }
+        
+        .stat-label {
+            color: var(--color-text-secondary);
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .quick-access-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .quick-card {
+            background: var(--color-clinical-white);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--color-glass-border);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-decoration: none;
+            color: var(--color-text-primary);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 102, 204, 0.05);
+        }
+        
+        .quick-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--color-electric-blue), var(--color-medical-green));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .quick-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .quick-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 102, 204, 0.15);
+            border-color: var(--color-primary-blue);
+        }
+        
+        .quick-card-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .quick-card-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .quick-stats {
+                gap: 2rem;
+            }
+            
+            .stat-number {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body data-theme="dark">
+    <!-- Animated Background -->
+    
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="index.html" class="navbar-brand">
+                <div class="navbar-logo">NIC</div>
+                <span class="navbar-title">Neuroscape Imaging Core</span>
+            </a>
+            
+            <ul class="navbar-nav">
+                <li><a href="index.html" class="nav-link active">Home</a></li>
+                <li><a href="equipment.html" class="nav-link">Equipment</a></li>
+                <li><a href="procedures.html" class="nav-link">Procedures</a></li>
+                <li><a href="troubleshooting.html" class="nav-link">Troubleshooting</a></li>
+                <li><a href="#resources" class="nav-link">Resources</a></li>
+            </ul>
+            
+            <div class="navbar-actions">
+                <button id="themeToggle" class="btn btn-secondary" aria-label="Toggle theme">🌙</button>
+                <button id="menuToggle" class="btn btn-secondary mobile-only" aria-label="Toggle menu">☰</button>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Loading Indicator -->
+    <div id="loader" class="loader-container active">
+        <div class="loading-spinner"></div>
+    </div>
+    
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <h1 class="hero-title">NIC WIKI</h1>
+            
+            <!-- Search Bar -->
+            <div class="search-container">
+                <div class="search-wrapper">
+                    <span class="search-icon">⚬</span>
+                    <input 
+                        type="text" 
+                        id="searchInput" 
+                        class="search-input" 
+                        placeholder="Search equipment, procedures, troubleshooting... (Ctrl+K)"
+                        autocomplete="off"
+                    >
+                </div>
+            </div>
+            
+            <p class="hero-subtitle">Siemens Prisma 3T</p>
+            
+            <!-- CTA Button for Scanning Requests -->
+            <div style="margin: 2rem 0;">
+                <button class="btn btn-primary btn-lg" onclick="openContactForm()" style="font-size: 1.1rem; padding: 1rem 2rem; box-shadow: 0 6px 20px rgba(0, 102, 204, 0.3);">
+                    🔬 Want to Scan at the NIC?
+                </button>
+            </div>
+            
+            <!-- Quick Stats Removed -->
+            <div class="quick-stats" style="display: none;">
+                <div class="stat-item">
+                    <div class="stat-number">3T</div>
+                    <div class="stat-label">Prisma Scanner</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">12</div>
+                    <div class="stat-label">Equipment Guides</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Support Access</div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Quick Access Section -->
+        <section class="glass-card mb-xl">
+            <h2 style="color: var(--color-clinical-white); margin-bottom: 1.5rem;">Quick Access</h2>
+            <div class="quick-access-grid">
+                <a href="participant-comfort.html" class="quick-card">
+                    <div class="quick-card-icon">◉</div>
+                    <div class="quick-card-title">Participant Comfort Guide</div>
+                    <div style="font-size: 0.875rem; opacity: 0.8;">Tips for participant comfort</div>
+                </a>
+                <a href="Scanner Troubleshooting Guide - Neuroscape - Wiki@UCSF.html" class="quick-card">
+                    <div class="quick-card-icon">◉</div>
+                    <div class="quick-card-title">Troubleshooting</div>
+                    <div style="font-size: 0.875rem; opacity: 0.8;">Common issues & fixes</div>
+                </a>
+                <a href="DICOM Transfer Guide - Neuroscape - Wiki@UCSF.html" class="quick-card">
+                    <div class="quick-card-icon">◉</div>
+                    <div class="quick-card-title">DICOM Transfer</div>
+                    <div style="font-size: 0.875rem; opacity: 0.8;">Data export procedures</div>
+                </a>
+                <a href="fORP - Neuroscape - Wiki@UCSF.html" class="quick-card">
+                    <div class="quick-card-icon">◉</div>
+                    <div class="quick-card-title">fORP Setup</div>
+                    <div style="font-size: 0.875rem; opacity: 0.8;">Response pad configuration</div>
+                </a>
+            </div>
+        </section>
+        
+        <!-- Main Categories Grid -->
+        <div class="category-grid">
+            <div class="category-card" data-category="equipment" onclick="window.location.href='equipment.html'">
+                <div class="category-icon">▣</div>
+                <h3 class="category-title">Equipment Guides</h3>
+                <p class="category-description">Technical documentation for MRI equipment, peripherals, and response systems. Includes setup procedures and calibration guides.</p>
+                <div style="margin-top: 1rem;">
+                    <span style="color: var(--color-electric-blue); font-size: 0.875rem;">4 guides available →</span>
+                </div>
+            </div>
+            
+            <div class="category-card" data-category="procedures" onclick="window.location.href='procedures.html'">
+                <div class="category-icon">▣</div>
+                <h3 class="category-title">Operating Procedures</h3>
+                <p class="category-description">Standard operating procedures for scanner operations, data management, and facility protocols.</p>
+                <div style="margin-top: 1rem;">
+                    <span style="color: var(--color-electric-blue); font-size: 0.875rem;">4 procedures documented →</span>
+                </div>
+            </div>
+            
+            <div class="category-card" data-category="troubleshooting" onclick="window.location.href='troubleshooting.html'">
+                <div class="category-icon">▣</div>
+                <h3 class="category-title">Troubleshooting</h3>
+                <p class="category-description">Diagnostic tools and solutions for scanner errors, equipment issues, and common problems.</p>
+                <div style="margin-top: 1rem;">
+                    <span style="color: var(--color-electric-blue); font-size: 0.875rem;">2 troubleshooting guides →</span>
+                </div>
+            </div>
+            
+            <div class="category-card" data-category="resources" id="resources">
+                <div class="category-icon">📚</div>
+                <h3 class="category-title">Resources</h3>
+                <p class="category-description">Training materials, patient preparation guides, and facility information for staff and researchers.</p>
+                <div style="margin-top: 1rem;">
+                    <span style="color: var(--color-electric-blue); font-size: 0.875rem;">2 resources available →</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Emergency Procedures Section -->
+        <section class="glass-card mt-xl" style="border-left: 4px solid var(--color-error-red);">
+            <h2 style="color: var(--color-clinical-white); margin-bottom: 1rem;">Emergency Procedures</h2>
+            <div style="display: flex; gap: 2rem; flex-wrap: wrap;">
+                <button class="btn btn-danger" onclick="showModal('emergencyModal')">
+                    🚨 Emergency Shutdown
+                </button>
+                <button class="btn btn-secondary" onclick="showModal('contactModal')">
+                    📞 Emergency Contacts
+                </button>
+            </div>
+        </section>
+        
+        <!-- Footer -->
+        <footer class="glass-card mt-xl" style="text-align: center;">
+            <div style="color: var(--color-dark-text-secondary);">
+                <strong style="color: var(--color-clinical-white);">Neuroscape Imaging Core</strong><br>
+                University of California, San Francisco<br>
+                <span style="color: var(--color-electric-blue);">Neuroscape Center</span><br>
+                <div style="margin-top: 1rem; font-size: 0.875rem;">
+                    <span>Press Ctrl+K to search</span> • 
+                    <span>Alt+T for theme</span> • 
+                    <span>Ctrl+/ for help</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+    <!-- Emergency Modal -->
+    <div id="emergencyModal" class="modal">
+        <div class="modal-backdrop" onclick="closeModal(event)"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Emergency Shutdown Procedure</h2>
+                <button class="modal-close" onclick="closeModal(event)">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="progress-container">
+                    <div class="progress-steps">
+                        <div class="progress-step active">
+                            <div class="progress-circle">1</div>
+                            <div class="progress-label">Press Emergency Stop</div>
+                        </div>
+                        <div class="progress-step">
+                            <div class="progress-circle">2</div>
+                            <div class="progress-label">Evacuate Patient</div>
+                        </div>
+                        <div class="progress-step">
+                            <div class="progress-circle">3</div>
+                            <div class="progress-label">Call Support</div>
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-top: 2rem; color: var(--color-dark-text-secondary);">
+                    <p><strong>Step 1:</strong> Press the red emergency stop button on the scanner console.</p>
+                    <p><strong>Step 2:</strong> Safely evacuate the patient from the scanner room.</p>
+                    <p><strong>Step 3:</strong> Contact technical support immediately at (415) 555-0123.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Contact Modal -->
+    <div id="contactModal" class="modal">
+        <div class="modal-backdrop" onclick="closeModal(event)"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Emergency Contacts</h2>
+                <button class="modal-close" onclick="closeModal(event)">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="accordion-group">
+                    <div class="accordion active">
+                        <div class="accordion-header" onclick="toggleAccordion(event)">
+                            <span class="accordion-title">Technical Support</span>
+                            <span class="accordion-icon">▼</span>
+                        </div>
+                        <div class="accordion-content" style="max-height: 200px;">
+                            <div class="accordion-body">
+                                <p>24/7 Hotline: <strong>(415) 555-0123</strong></p>
+                                <p>Email: support@neuroscape.ucsf.edu</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion">
+                        <div class="accordion-header" onclick="toggleAccordion(event)">
+                            <span class="accordion-title">Medical Emergency</span>
+                            <span class="accordion-icon">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-body">
+                                <p>Emergency: <strong>911</strong></p>
+                                <p>UCSF Medical: <strong>(415) 476-1000</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Toast Container -->
+    <div id="toastContainer" class="toast-container"></div>
+    
+    <!-- Contact Form Modal -->
+    <div id="contactFormModal" class="modal">
+        <div class="modal-content" style="max-width: 700px;">
+            <div class="modal-header">
+                <h2 class="modal-title">Request Scanner Time at NIC</h2>
+                <button class="modal-close" onclick="closeContactForm()">&times;</button>
+            </div>
+            <form id="scanRequestForm" class="scan-request-form">
+                <!-- Contact Information -->
+                <div class="form-section">
+                    <h3 style="color: var(--color-primary-blue); margin-bottom: 1rem;">Contact Information</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="name">Full Name *</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="institution">Institution/Department *</label>
+                            <input type="text" id="institution" name="institution" required>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project Details -->
+                <div class="form-section">
+                    <h3 style="color: var(--color-primary-blue); margin-bottom: 1rem;">Project Details</h3>
+                    <div class="form-grid">
+                        <div class="form-group full-width">
+                            <label for="projectTitle">Project Title *</label>
+                            <input type="text" id="projectTitle" name="projectTitle" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="pi">Principal Investigator *</label>
+                            <input type="text" id="pi" name="pi" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="participants">Number of Participants</label>
+                            <input type="number" id="participants" name="participants" min="1">
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="description">Brief Project Description *</label>
+                            <textarea id="description" name="description" rows="4" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="duration">Estimated Scan Duration *</label>
+                            <select id="duration" name="duration" required>
+                                <option value="">Select duration...</option>
+                                <option value="1 hour">1 hour</option>
+                                <option value="2 hours">2 hours</option>
+                                <option value="Half day">Half day (4 hours)</option>
+                                <option value="Full day">Full day (8 hours)</option>
+                                <option value="Multiple days">Multiple days</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="timeline">Preferred Timeline</label>
+                            <input type="text" id="timeline" name="timeline" placeholder="e.g., Next month, Q1 2024">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Additional Information -->
+                <div class="form-section">
+                    <h3 style="color: var(--color-primary-blue); margin-bottom: 1rem;">Additional Information</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="irbStatus">IRB Approval Status *</label>
+                            <select id="irbStatus" name="irbStatus" required>
+                                <option value="">Select status...</option>
+                                <option value="Approved">Approved</option>
+                                <option value="Pending">Pending</option>
+                                <option value="Not Required">Not Required</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Previous MRI Experience? *</label>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" name="experience" value="yes" required>
+                                    <span>Yes</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="experience" value="no" required>
+                                    <span>No</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="requirements">Special Requirements or Notes</label>
+                            <textarea id="requirements" name="requirements" rows="3" placeholder="Any special equipment needs, timing constraints, etc."></textarea>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Honeypot field for spam prevention -->
+                <div style="display: none;">
+                    <input type="text" name="website" id="website">
+                </div>
+                
+                <!-- Form Actions -->
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeContactForm()">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="submitBtn">
+                        <span id="submitBtnText">Submit Request</span>
+                        <span id="submitBtnLoader" style="display: none;">Sending...</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/contact-form.js"></script>
+    <script>
+        // Page-specific initialization
+        document.addEventListener('DOMContentLoaded', () => {
+            // Animate stat numbers
+            const statNumbers = document.querySelectorAll('.stat-number');
+            statNumbers.forEach(stat => {
+                const value = stat.textContent;
+                stat.textContent = '0';
+                setTimeout(() => {
+                    stat.textContent = value;
+                }, 500);
+            });
+            
+            // Show welcome toast
+            setTimeout(() => {
+                NeuroscapeApp.showToast('Welcome to Neuroscape Imaging Core', 'success');
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

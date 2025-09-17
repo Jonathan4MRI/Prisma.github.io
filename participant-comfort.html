@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Participant Comfort Guide - Neuroscape Imaging Core</title>
+    <meta name="description" content="Tips and techniques for ensuring participant comfort during MRI scanning">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <style>
+        .comfort-hero {
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.1), rgba(0, 200, 150, 0.1));
+            border-radius: 1rem;
+            padding: 3rem;
+            margin: 80px 0 2rem;
+            text-align: center;
+        }
+        
+        .comfort-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--color-electric-blue);
+            margin-bottom: 1rem;
+        }
+        
+        .comfort-section {
+            margin-bottom: 3rem;
+        }
+        
+        .section-title {
+            color: var(--color-clinical-white);
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--color-electric-blue);
+        }
+        
+        .comfort-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .comfort-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .comfort-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.2);
+            border-color: var(--color-electric-blue);
+        }
+        
+        .comfort-card h3 {
+            color: var(--color-medical-green);
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+        
+        .comfort-card p {
+            color: var(--color-dark-text-secondary);
+            line-height: 1.6;
+        }
+        
+        .photo-placeholder {
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.2), rgba(0, 200, 150, 0.2));
+            border: 2px dashed var(--color-electric-blue);
+            border-radius: 0.5rem;
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-electric-blue);
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            padding: 1rem;
+        }
+        
+        .tip-box {
+            background: rgba(0, 217, 255, 0.1);
+            border-left: 4px solid var(--color-electric-blue);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin: 1rem 0;
+        }
+        
+        .tip-box strong {
+            color: var(--color-electric-blue);
+        }
+        
+        .checklist {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .checklist h3 {
+            color: var(--color-clinical-white);
+            margin-bottom: 1rem;
+        }
+        
+        .checklist-item {
+            padding: 0.5rem 0;
+            color: var(--color-dark-text-secondary);
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .checklist-item::before {
+            content: "✓";
+            color: var(--color-medical-green);
+            margin-right: 0.75rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body data-theme="dark">
+    
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="index.html" class="navbar-brand">
+                <div class="navbar-logo">NIC</div>
+                <span class="navbar-title">Neuroscape Imaging Core</span>
+            </a>
+            
+            <ul class="navbar-nav">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="equipment.html" class="nav-link">Equipment</a></li>
+                <li><a href="#" class="nav-link active">Comfort Guide</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="comfort-hero">
+            <h1 class="comfort-title">🛏️ Participant Comfort Guide</h1>
+            <p style="color: var(--color-dark-text-secondary); font-size: 1.1rem;">
+                Ensuring participant comfort and safety during MRI scanning sessions
+            </p>
+        </div>
+        
+        <!-- Positioning Section -->
+        <section class="glass-card comfort-section">
+            <h2 class="section-title">Positioning & Setup</h2>
+            
+            <div class="comfort-grid">
+                <div class="comfort-card">
+                    <div class="photo-placeholder">
+                        [Photo: Proper head positioning in coil]
+                    </div>
+                    <h3>Head Positioning</h3>
+                    <p>Ensure the participant's head is centered in the coil with adequate padding around the sides. The top of the head should be aligned with the top of the coil.</p>
+                    <div class="tip-box">
+                        <strong>Tip:</strong> Use foam pads to fill gaps and minimize head movement
+                    </div>
+                </div>
+                
+                <div class="comfort-card">
+                    <div class="photo-placeholder">
+                        [Photo: Knee support cushion placement]
+                    </div>
+                    <h3>Knee Support</h3>
+                    <p>Place a bolster under the knees to reduce lower back strain. This is especially important for longer scans.</p>
+                    <div class="tip-box">
+                        <strong>Tip:</strong> Ask about back problems before positioning
+                    </div>
+                </div>
+                
+                <div class="comfort-card">
+                    <div class="photo-placeholder">
+                        [Photo: Proper blanket placement]
+                    </div>
+                    <h3>Temperature Comfort</h3>
+                    <p>Offer a blanket as the scanner room is kept cool. Ensure the blanket doesn't interfere with coil positioning.</p>
+                    <div class="tip-box">
+                        <strong>Tip:</strong> Tuck blanket edges to prevent sliding during scan
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Communication Section -->
+        <section class="glass-card comfort-section">
+            <h2 class="section-title">Communication & Reassurance</h2>
+            
+            <div class="comfort-grid">
+                <div class="comfort-card">
+                    <div class="photo-placeholder">
+                        [Photo: Emergency squeeze ball in hand]
+                    </div>
+                    <h3>Emergency Squeeze Ball</h3>
+                    <p>Place the squeeze ball firmly in the participant's hand. Demonstrate how to use it and assure them you'll respond immediately.</p>
+                </div>
+                
+                <div class="comfort-card">
+                    <div class="photo-placeholder">
+                        [Photo: Mirror setup showing outside view]
+                    </div>
+                    <h3>Mirror Positioning</h3>
+                    <p>Adjust the mirror so participants can see out of the bore. This helps reduce claustrophobia and provides visual connection.</p>
+                </div>
+                
+                <div class="comfort-card">
+                    <div class="photo-placeholder">
+                        [Photo: Headphone placement]
+                    </div>
+                    <h3>Audio Setup</h3>
+                    <p>Ensure headphones are comfortable and secure. Test audio levels before starting. Explain you can hear them between scans.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Special Considerations -->
+        <section class="glass-card comfort-section">
+            <h2 class="section-title">Special Considerations</h2>
+            
+            <div class="checklist">
+                <h3>Claustrophobic Participants</h3>
+                <div class="checklist-item">Keep feet out of bore when possible</div>
+                <div class="checklist-item">Use fan for air circulation</div>
+                <div class="checklist-item">Offer eye mask if preferred over keeping eyes open</div>
+                <div class="checklist-item">Practice breathing exercises before entering</div>
+                <div class="checklist-item">Consider feet-first positioning when protocol allows</div>
+            </div>
+            
+            <div class="checklist">
+                <h3>Pediatric Participants</h3>
+                <div class="checklist-item">Allow parent/guardian to stay in room if possible</div>
+                <div class="checklist-item">Show mock scanner or photos beforehand</div>
+                <div class="checklist-item">Use child-friendly language to explain sounds</div>
+                <div class="checklist-item">Offer to play calming music or stories</div>
+                <div class="checklist-item">Use extra padding for smaller body sizes</div>
+            </div>
+            
+            <div class="checklist">
+                <h3>Elderly Participants</h3>
+                <div class="checklist-item">Extra time for positioning and transfers</div>
+                <div class="checklist-item">Additional padding for joint comfort</div>
+                <div class="checklist-item">Clear communication about scan duration</div>
+                <div class="checklist-item">Frequent comfort checks between sequences</div>
+                <div class="checklist-item">Ensure hearing aids are removed and participant can still hear instructions</div>
+            </div>
+        </section>
+        
+        <!-- Quick Tips -->
+        <section class="glass-card comfort-section">
+            <h2 class="section-title">Quick Comfort Tips</h2>
+            
+            <div class="comfort-grid">
+                <div class="tip-box">
+                    <strong>Before Scanning:</strong> Have participant use restroom, remove all metal, and do a final comfort check
+                </div>
+                <div class="tip-box">
+                    <strong>During Setup:</strong> Explain each step, work efficiently but don't rush, maintain calm demeanor
+                </div>
+                <div class="tip-box">
+                    <strong>During Scanning:</strong> Check in between sequences, provide time updates, stay encouraging
+                </div>
+                <div class="tip-box">
+                    <strong>After Scanning:</strong> Help participant sit up slowly, ensure they're steady before standing
+                </div>
+            </div>
+        </section>
+        
+        <!-- Common Issues -->
+        <section class="glass-card comfort-section">
+            <h2 class="section-title">Troubleshooting Comfort Issues</h2>
+            
+            <div class="comfort-grid">
+                <div class="comfort-card">
+                    <h3>Motion from Discomfort</h3>
+                    <p>If participant is moving due to discomfort, pause and readjust. Better to take time repositioning than repeat sequences.</p>
+                </div>
+                
+                <div class="comfort-card">
+                    <h3>Anxiety During Scan</h3>
+                    <p>Talk between sequences, provide remaining time, offer short break if needed. Consider rescheduling if anxiety is severe.</p>
+                </div>
+                
+                <div class="comfort-card">
+                    <h3>Temperature Issues</h3>
+                    <p>Adjust fan speed, add/remove blanket between sequences. Be aware that anxiety can cause feeling hot.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+</body>
+</html>

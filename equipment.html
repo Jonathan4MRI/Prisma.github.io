@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipment Guides - Neuroscape Imaging Core</title>
+    <meta name="description" content="Technical documentation for MRI equipment, peripherals, and response systems">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <style>
+        .equipment-hero {
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.1), rgba(0, 200, 150, 0.1));
+            border-radius: 1rem;
+            padding: 3rem;
+            margin: 80px 0 2rem;
+            text-align: center;
+        }
+        
+        .equipment-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--color-electric-blue);
+            margin-bottom: 1rem;
+        }
+        
+        .equipment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .equipment-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .equipment-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 217, 255, 0.2);
+            border-color: var(--color-electric-blue);
+        }
+        
+        .equipment-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--color-space-blue), var(--color-dark-surface));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: var(--color-electric-blue);
+        }
+        
+        .equipment-content {
+            padding: 1.5rem;
+        }
+        
+        .equipment-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--color-clinical-white);
+            margin-bottom: 0.5rem;
+        }
+        
+        .equipment-description {
+            color: var(--color-dark-text-secondary);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+        
+        .equipment-specs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .spec-badge {
+            background: rgba(0, 217, 255, 0.1);
+            border: 1px solid var(--color-electric-blue);
+            color: var(--color-electric-blue);
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        
+        .equipment-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .setup-wizard {
+            background: rgba(0, 200, 150, 0.1);
+            border: 1px solid var(--color-medical-green);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .wizard-steps {
+            counter-reset: step;
+        }
+        
+        .wizard-step {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 1rem;
+            color: var(--color-dark-text-secondary);
+        }
+        
+        .wizard-step::before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 1.5rem;
+            height: 1.5rem;
+            background: var(--color-medical-green);
+            color: var(--color-clinical-white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .filter-bar {
+            background: var(--color-glass-white);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--color-glass-border);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            background: transparent;
+            border: 1px solid var(--color-glass-border);
+            color: var(--color-dark-text-secondary);
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn:hover {
+            border-color: var(--color-electric-blue);
+            color: var(--color-electric-blue);
+        }
+        
+        .filter-btn.active {
+            background: var(--color-electric-blue);
+            border-color: var(--color-electric-blue);
+            color: var(--color-clinical-white);
+        }
+    </style>
+</head>
+<body data-theme="dark">
+    
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="index.html" class="navbar-brand">
+                <div class="navbar-logo">NIC</div>
+                <span class="navbar-title">Neuroscape Imaging Core</span>
+            </a>
+            
+            <ul class="navbar-nav">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="equipment.html" class="nav-link active">Equipment</a></li>
+                <li><a href="procedures.html" class="nav-link">Procedures</a></li>
+                <li><a href="troubleshooting.html" class="nav-link">Troubleshooting</a></li>
+                <li><a href="index.html#resources" class="nav-link">Resources</a></li>
+            </ul>
+            
+            <div class="navbar-actions">
+                <button id="themeToggle" class="btn btn-secondary" aria-label="Toggle theme">🌙</button>
+                <button id="menuToggle" class="btn btn-secondary mobile-only" aria-label="Toggle menu">☰</button>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="equipment-hero">
+            <h1 class="equipment-title">Equipment Guides</h1>
+            <p style="color: var(--color-dark-text-secondary); font-size: 1.1rem;">
+                Comprehensive documentation for MRI equipment and peripheral systems
+            </p>
+        </div>
+        
+        <!-- Search Bar -->
+        <div class="search-container">
+            <div class="search-wrapper">
+                <span class="search-icon">🔍</span>
+                <input 
+                    type="text" 
+                    id="searchInput" 
+                    class="search-input" 
+                    placeholder="Search equipment documentation..."
+                    autocomplete="off"
+                >
+            </div>
+        </div>
+        
+        <!-- Filter Bar -->
+        <div class="filter-bar">
+            <button class="filter-btn active" data-filter="all">All Equipment</button>
+            <button class="filter-btn" data-filter="response">Response Systems</button>
+            <button class="filter-btn" data-filter="visual">Visual Systems</button>
+            <button class="filter-btn" data-filter="audio">Audio Systems</button>
+        </div>
+        
+        <!-- Equipment Grid -->
+        <div class="equipment-grid">
+            <!-- fORP System -->
+            <div class="equipment-card" data-category="response">
+                <div class="equipment-image">🎮</div>
+                <div class="equipment-content">
+                    <h2 class="equipment-name">fORP System</h2>
+                    <p class="equipment-description">
+                        Fiber-Optic Response Pad system for precise response collection during fMRI experiments. 
+                        MRI-compatible button box with minimal electromagnetic interference.
+                    </p>
+                    <div class="equipment-specs">
+                        <span class="spec-badge">4 Buttons</span>
+                        <span class="spec-badge">USB Interface</span>
+                        <span class="spec-badge">MRI Safe</span>
+                    </div>
+                    <div class="setup-wizard">
+                        <h3 style="color: var(--color-medical-green); font-size: 1rem; margin-bottom: 0.5rem;">Quick Setup</h3>
+                        <div class="wizard-steps">
+                            <div class="wizard-step">Connect fiber optic bundle to scanner room port</div>
+                            <div class="wizard-step">Attach response pad to participant</div>
+                            <div class="wizard-step">Configure button mapping in software</div>
+                            <div class="wizard-step">Test responses before scan</div>
+                        </div>
+                    </div>
+                    <div class="equipment-actions">
+                        <a href="fORP - Neuroscape - Wiki@UCSF.html" class="btn btn-primary">
+                            View Full Guide
+                        </a>
+                        <button class="btn btn-secondary" onclick="NeuroscapeApp.showToast('Setup wizard launching...', 'info')">
+                            Setup Wizard
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- MRGlasses -->
+            <div class="equipment-card" data-category="visual">
+                <div class="equipment-image">👓</div>
+                <div class="equipment-content">
+                    <h2 class="equipment-name">MRGlasses</h2>
+                    <p class="equipment-description">
+                        Vision correction system designed specifically for MRI environments. 
+                        Non-magnetic prescription lenses for participants requiring vision correction.
+                    </p>
+                    <div class="equipment-specs">
+                        <span class="spec-badge">-8 to +6 Diopters</span>
+                        <span class="spec-badge">Non-Magnetic</span>
+                        <span class="spec-badge">Adjustable</span>
+                    </div>
+                    <div class="accordion">
+                        <div class="accordion-header" onclick="toggleAccordion(event)">
+                            <span class="accordion-title">Compatibility Chart</span>
+                            <span class="accordion-icon">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-body">
+                                <p>Compatible with all Siemens head coils</p>
+                                <p>Fits over most prescription frames</p>
+                                <p>Available in multiple sizes</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="equipment-actions">
+                        <a href="MRGlasses - Neuroscape - Wiki@UCSF.html" class="btn btn-primary">
+                            View Full Guide
+                        </a>
+                        <button class="btn btn-secondary" onclick="NeuroscapeApp.showToast('Calibration tool loading...', 'info')">
+                            Calibration Tool
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Audio System -->
+            <div class="equipment-card" data-category="audio">
+                <div class="equipment-image">🎧</div>
+                <div class="equipment-content">
+                    <h2 class="equipment-name">Siemens Audio System</h2>
+                    <p class="equipment-description">
+                        High-fidelity audio delivery system with active noise cancellation. 
+                        Designed for clear communication and stimulus presentation during scans.
+                    </p>
+                    <div class="equipment-specs">
+                        <span class="spec-badge">30dB Attenuation</span>
+                        <span class="spec-badge">Pneumatic</span>
+                        <span class="spec-badge">Intercom</span>
+                    </div>
+                    <div class="progress-container">
+                        <h3 style="color: var(--color-clinical-white); font-size: 1rem; margin-bottom: 1rem;">Safety Checklist</h3>
+                        <div class="progress-steps">
+                            <div class="progress-step completed">
+                                <div class="progress-circle">✓</div>
+                                <div class="progress-label">Volume Check</div>
+                            </div>
+                            <div class="progress-step active">
+                                <div class="progress-circle">2</div>
+                                <div class="progress-label">Patient Comfort</div>
+                            </div>
+                            <div class="progress-step">
+                                <div class="progress-circle">3</div>
+                                <div class="progress-label">Test Communication</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="equipment-actions">
+                        <a href="Siemens Audio Systems Guide - Neuroscape - Wiki@UCSF.html" class="btn btn-primary">
+                            View Full Guide
+                        </a>
+                        <button class="btn btn-secondary" onclick="NeuroscapeApp.showToast('Audio test starting...', 'info')">
+                            Audio Test
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- NNL Display -->
+            <div class="equipment-card" data-category="visual">
+                <div class="equipment-image">🖥️</div>
+                <div class="equipment-content">
+                    <h2 class="equipment-name">NNL Display System</h2>
+                    <p class="equipment-description">
+                        Nordic NeuroLab visual presentation system with high-resolution display. 
+                        Optimized for visual stimuli presentation and eye-tracking integration.
+                    </p>
+                    <div class="equipment-specs">
+                        <span class="spec-badge">1920x1080</span>
+                        <span class="spec-badge">60Hz Refresh</span>
+                        <span class="spec-badge">Eye Tracking</span>
+                    </div>
+                    <div style="background: rgba(255, 165, 0, 0.1); border: 1px solid var(--color-warning-amber); border-radius: 0.5rem; padding: 1rem; margin: 1rem 0;">
+                        <p style="color: var(--color-warning-amber); font-weight: 500; margin-bottom: 0.5rem;">⚠ Important Note</p>
+                        <p style="color: var(--color-dark-text-secondary); font-size: 0.875rem;">
+                            Ensure mirror alignment is checked before each session. Misalignment can affect stimulus presentation quality.
+                        </p>
+                    </div>
+                    <div class="equipment-actions">
+                        <a href="NNL - Neuroscape - Wiki@UCSF.html" class="btn btn-primary">
+                            View Full Guide
+                        </a>
+                        <button class="btn btn-secondary" onclick="NeuroscapeApp.showToast('Alignment check initiated...', 'info')">
+                            Check Alignment
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Tips Section -->
+        <section class="glass-card mt-xl">
+            <h2 style="color: var(--color-clinical-white); margin-bottom: 1.5rem;">Equipment Best Practices</h2>
+            <div class="accordion-group">
+                <div class="accordion">
+                    <div class="accordion-header" onclick="toggleAccordion(event)">
+                        <span class="accordion-title">Daily Maintenance Checklist</span>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <ul style="list-style: none; padding: 0;">
+                                <li style="margin-bottom: 0.5rem;">✓ Clean all optical surfaces with approved wipes</li>
+                                <li style="margin-bottom: 0.5rem;">✓ Test all response buttons for proper function</li>
+                                <li style="margin-bottom: 0.5rem;">✓ Verify audio levels are within safe limits</li>
+                                <li style="margin-bottom: 0.5rem;">✓ Check cable connections for wear</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion">
+                    <div class="accordion-header" onclick="toggleAccordion(event)">
+                        <span class="accordion-title">Common Setup Mistakes</span>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p style="margin-bottom: 0.5rem;"><strong>fORP:</strong> Not testing button mapping before scan</p>
+                            <p style="margin-bottom: 0.5rem;"><strong>Audio:</strong> Volume set too high initially</p>
+                            <p style="margin-bottom: 0.5rem;"><strong>Display:</strong> Mirror angle not optimized for participant height</p>
+                            <p><strong>Glasses:</strong> Wrong diopter strength selected</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Footer -->
+        <footer class="glass-card mt-xl" style="text-align: center;">
+            <div style="color: var(--color-dark-text-secondary);">
+                <strong style="color: var(--color-clinical-white);">Equipment Support</strong><br>
+                For technical assistance: (415) 555-0123<br>
+                <a href="mailto:equipment@neuroscape.ucsf.edu" style="color: var(--color-electric-blue); text-decoration: none;">
+                    equipment@neuroscape.ucsf.edu
+                </a>
+            </div>
+        </footer>
+    </div>
+    
+    <!-- Toast Container -->
+    <div id="toastContainer" class="toast-container"></div>
+    
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script>
+        // Filter functionality
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                // Update active state
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                e.target.classList.add('active');
+                
+                // Filter cards
+                const filter = e.target.dataset.filter;
+                document.querySelectorAll('.equipment-card').forEach(card => {
+                    if (filter === 'all' || card.dataset.category === filter) {
+                        card.style.display = '';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
