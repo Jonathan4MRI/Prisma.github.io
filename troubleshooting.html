@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MRI Suite Troubleshooting Guide - UCSF Neuroscape</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-dark: #0A1628;
+            --primary-light: #1E293B;
+            --accent-blue: #00D9FF;
+            --accent-green: #00C896;
+            --warning: #FFA500;
+            --danger: #FF4444;
+            --text-primary: #FFFFFF;
+            --text-secondary: #94A3B8;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'SF Pro Display', 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0A1628 0%, #1E293B 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #00D9FF 0%, #00C896 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 40px rgba(0, 217, 255, 0.3);
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+        }
+
+        .search-container {
+            position: relative;
+            margin-bottom: 3rem;
+            animation: fadeIn 1s ease 0.2s both;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1.2rem 3rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 1rem;
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .search-input::placeholder {
+            color: var(--text-secondary);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 30px rgba(0, 217, 255, 0.2);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+        }
+
+        .quick-filters {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            animation: fadeIn 1s ease 0.4s both;
+        }
+
+        .filter-chip {
+            padding: 0.5rem 1rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .filter-chip:hover {
+            background: rgba(0, 217, 255, 0.1);
+            border-color: var(--accent-blue);
+            transform: translateY(-2px);
+        }
+
+        .filter-chip.active {
+            background: rgba(0, 217, 255, 0.2);
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
+        }
+
+        .problems-container {
+            display: grid;
+            gap: 1.5rem;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .problem-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 1rem;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .problem-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .problem-header {
+            padding: 1.5rem;
+            background: linear-gradient(135deg, rgba(255, 68, 68, 0.1) 0%, rgba(255, 165, 0, 0.1) 100%);
+            border-bottom: 1px solid var(--glass-border);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .problem-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .problem-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--danger) 0%, var(--warning) 100%);
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .problem-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .expand-icon {
+            transition: transform 0.3s ease;
+            color: var(--text-secondary);
+        }
+
+        .problem-card.expanded .expand-icon {
+            transform: rotate(180deg);
+        }
+
+        .problem-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .problem-card.expanded .problem-content {
+            max-height: 1000px;
+        }
+
+        .solution-steps {
+            padding: 1.5rem;
+        }
+
+        .solution-step {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: rgba(0, 200, 150, 0.05);
+            border-left: 3px solid var(--accent-green);
+            border-radius: 0.5rem;
+            animation: slideInRight 0.5s ease;
+        }
+
+        .step-number {
+            width: 30px;
+            height: 30px;
+            background: var(--accent-green);
+            color: var(--primary-dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex: 1;
+            line-height: 1.8;
+        }
+
+        .category-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: rgba(0, 217, 255, 0.1);
+            color: var(--accent-blue);
+            border-radius: 1rem;
+            font-size: 0.85rem;
+            margin-left: 1rem;
+        }
+
+        .emergency-contact {
+            margin-top: 3rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(255, 68, 68, 0.1) 0%, rgba(255, 165, 0, 0.05) 100%);
+            border: 2px solid var(--danger);
+            border-radius: 1rem;
+            text-align: center;
+            animation: pulse 2s infinite;
+        }
+
+        .contact-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--danger) 0%, var(--warning) 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            margin-top: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .contact-button:hover {
+            transform: scale(1.05);
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(255, 68, 68, 0.2);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(255, 68, 68, 0.4);
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .problem-header {
+                padding: 1rem;
+            }
+
+            .solution-steps {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>MRI Suite Troubleshooting</h1>
+            <p class="subtitle">Quick solutions to common problems</p>
+        </header>
+
+        <div class="search-container">
+            <svg class="search-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="M21 21l-4.35-4.35"></path>
+            </svg>
+            <input type="text" class="search-input" id="searchInput" placeholder="Search for a problem or error message...">
+        </div>
+
+        <div class="quick-filters">
+            <div class="filter-chip" data-category="all">All Issues</div>
+            <div class="filter-chip" data-category="display">Display</div>
+            <div class="filter-chip" data-category="hardware">Hardware</div>
+            <div class="filter-chip" data-category="audio">Audio</div>
+            <div class="filter-chip" data-category="patient">Patient</div>
+            <div class="filter-chip" data-category="scanner">Scanner</div>
+            <div class="filter-chip" data-category="data">Data Transfer</div>
+        </div>
+
+        <div class="problems-container" id="problemsContainer">
+            <div class="problem-card" data-category="display" data-search="nnl screen display blank monitor hdmi">
+                <div class="problem-header">
+                    <div class="problem-title">
+                        <div class="problem-icon">🖥️</div>
+                        <span class="problem-text">NNL Screen is on but not displaying anything</span>
+                        <span class="category-badge">Display</span>
+                    </div>
+                    <svg class="expand-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </div>
+                <div class="problem-content">
+                    <div class="solution-steps">
+                        <div class="solution-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                Unplug the HDMI cord and replug it in. The NNL screen needs to know the refresh rate of the monitors to ensure consistent timing in responses. Unplugging and re-plugging jumpstarts this process and fixes it most of the time.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="problem-card" data-category="hardware" data-search="forp button box not working usb power">
+                <div class="problem-header">
+                    <div class="problem-title">
+                        <div class="problem-icon">🎮</div>
+                        <span class="problem-text">fORP Button Box isn't working</span>
+                        <span class="category-badge">Hardware</span>
+                    </div>
+                    <svg class="expand-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </div>
+                <div class="problem-content">
+                    <div class="solution-steps">
+                        <div class="solution-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                Check the USB cable is correctly plugged into the task computer
+                            </div>
+                        </div>
+                        <div class="solution-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                Ensure the power cord is connected
+                            </div>
+                        </div>
+                        <div class="solution-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                Ensure the configuration of the button box is as to your study's specifications. Consult the fORP configuration guide for more info.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="problem-card" data-category="patient hardware" data-search="head too large 64 channel coil fit">
+                <div class="problem-header">
+                    <div class="problem-title">
+                        <div class="problem-icon">🧠</div>
+                        <span class="problem-text">Participant's head is too large for 64 channel head coil</span>
+                        <span class="category-badge">Patient</span>
+                    </div>
+                    <svg class="expand-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </div>
+                <div class="problem-content">
+                    <div class="solution-steps">
+                        <div class="solution-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                Call Jonathan. There are many positioning tips and tricks to get their head and angle positioned better. A few millimeters makes a big difference here.
+                            </div>
+                        </div>
+                        <div class="solution-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                Last resort option: Use the 20 channel head coil. <strong>WARNING:</strong> Many scans such as fMRI and DTI2500 do not work correctly with the 20 channel coil and produce incorrect results. If using the 20 channel coil, make sure to note this in the scan notes.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="problem-card" data-category="audio" data-search="no sound audio playing siemens aux">
+                <div class="problem-header">
+                    <div class="problem-title">
+                        <div class="problem-icon">🔊</div>
+                        <span class="problem-text">No sound is playing</span>
+                        <span class="category-badge">Audio</span>
+                    </div>
+                    <svg class="expand-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </div>
+                <div class="problem-content">
+                    <div class="solution-steps">
+                        <div class="solution-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                Check the blue aux cord behind the desk. One end goes into the Siemens audio console, the other goes into the green audio jack of the stim PC.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="problem-card" data-category="patient" data-search="claustrophobic claustrophobia anxious nervous">
+                <div class="problem-header">
+                    <div class="problem-title">
+                        <div class="problem-icon">😰</div>
+                        <span class="problem-text">Participant is claustrophobic</span>
+                        <span class="category-badge">Patient</span>
+                    </div>
+                    <svg class="expand-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </div>
+                <div class="problem-content">
+                    <div class="solution-steps">
+                        <div class="solution-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                Call Jonathan immediately. There are many tips and tricks we can try to help the participant feel more comfortable and complete the scan successfully.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="problem-card" data-category="scanner" data-search="sar limit exceeded calculate rise time">
+                <div class="problem-header">
+                    <div class="problem-title">
+                        <div class="problem-icon">⚠️</div>
+                        <span class="problem-text">Scanner shows: SAR limit exceeded!</span>
+                        <span class="category-badge">Scanner</span>
+                    </div>
+                    <svg class="expand-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </div>
+                <div class="problem-content">
+                    <div class="solution-steps">
+                        <div class="solution-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                The pop-up will have a 'Calculate' button. Hit that button and select the option that increases the rise time of the protocol. Make a note of how much the rise time increased and include it in the scan notes.
+                            </div>
+                        </div>
+                        <div class="solution-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                If calculation fails, wait a few minutes and try again. Sometimes it helps to run another scan first, then come back to the one that reached the SAR limit.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="problem-card" data-category="data" data-search="images anubix transfer dicom not appearing">
+                <div class="problem-header">
+                    <div class="problem-title">
+                        <div class="problem-icon">📁</div>
+                        <span class="problem-text">Images not appearing on Anubix 2 after transfer</span>
+                        <span class="category-badge">Data Transfer</span>
+                    </div>
+                    <svg class="expand-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </div>
+                <div class="problem-content">
+                    <div class="solution-steps">
+                        <div class="solution-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                Make sure Anubix 2 was turned on BEFORE you sent your scan.
+                            </div>
+                        </div>
+                        <div class="solution-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                Make sure you selected the top level of the patient's folder. If only the first or second scan was selected, then only those will be sent over.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="emergency-contact">
+            <h2>Need Immediate Assistance?</h2>
+            <p>If you're experiencing an issue not listed here or need urgent help:</p>
+            <a href="tel:jonathan" class="contact-button">📞 Call Jonathan</a>
+        </div>
+    </div>
+
+    <script>
+        // Toggle problem cards
+        document.querySelectorAll('.problem-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const card = header.parentElement;
+                card.classList.toggle('expanded');
+            });
+        });
+
+        // Search functionality
+        const searchInput = document.getElementById('searchInput');
+        const problemCards = document.querySelectorAll('.problem-card');
+
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+
+            problemCards.forEach(card => {
+                const searchText = card.dataset.search.toLowerCase();
+                const problemText = card.querySelector('.problem-text').textContent.toLowerCase();
+
+                if (searchText.includes(searchTerm) || problemText.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
+        // Filter functionality
+        const filterChips = document.querySelectorAll('.filter-chip');
+
+        filterChips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                // Remove active class from all chips
+                filterChips.forEach(c => c.classList.remove('active'));
+                chip.classList.add('active');
+
+                const category = chip.dataset.category;
+
+                problemCards.forEach(card => {
+                    if (category === 'all' || card.dataset.category.includes(category)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Set 'All Issues' as active by default
+        document.querySelector('[data-category="all"]').classList.add('active');
+    </script>
+</body>
+</html>
