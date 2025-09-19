@@ -162,6 +162,10 @@
                 <li><a href="equipment.html" class="nav-link">Equipment</a></li>
                 <li><a href="troubleshooting.html" class="nav-link">Troubleshooting</a></li>
             </ul>
+
+            <button class="btn btn-danger" onclick="showModal('emergencyModal')" style="position: absolute; left: 50%; transform: translateX(-50%); font-weight: 600; padding: 0.5rem 1.5rem; background: var(--color-error-red); border: none; box-shadow: 0 2px 10px rgba(255, 0, 0, 0.3);">
+                🚨 EMERGENCY SHUTDOWN
+            </button>
             
         </div>
     </nav>
@@ -191,7 +195,7 @@
                 </div>
             </div>
             
-            <p class="hero-subtitle">Siemens Prisma 3T</p>
+            <p class="hero-subtitle" style="color: #4A5568;">Siemens Prisma 3T</p>
             
             <!-- CTA Button for Scanning Requests -->
             <div style="margin: 2rem 0;">
@@ -219,22 +223,22 @@
         
         <!-- Quick Access Section -->
         <section class="glass-card mb-xl">
-            <h2 style="color: var(--color-clinical-white); margin-bottom: 1.5rem;">Quick Access</h2>
+            <h2 style="color: #1A1F2E; margin-bottom: 1.5rem;">Quick Access</h2>
             <div class="quick-access-grid">
                 <a href="participant-comfort.html" class="quick-card">
                     <div class="quick-card-icon">◉</div>
                     <div class="quick-card-title">Participant Comfort Guide</div>
-                    <div style="font-size: 0.875rem; opacity: 0.8;">Tips for participant comfort</div>
+                    <div style="font-size: 0.875rem; color: #4A5568;">Tips for participant comfort</div>
                 </a>
                 <a href="troubleshooting.html" class="quick-card">
                     <div class="quick-card-icon">◉</div>
                     <div class="quick-card-title">Troubleshooting</div>
-                    <div style="font-size: 0.875rem; opacity: 0.8;">Common issues & fixes</div>
+                    <div style="font-size: 0.875rem; color: #4A5568;">Common issues & fixes</div>
                 </a>
                 <a href="fORP - Neuroscape - Wiki@UCSF.html" class="quick-card">
                     <div class="quick-card-icon">◉</div>
                     <div class="quick-card-title">fORP Setup</div>
-                    <div style="font-size: 0.875rem; opacity: 0.8;">Response pad configuration</div>
+                    <div style="font-size: 0.875rem; color: #4A5568;">Response pad configuration</div>
                 </a>
             </div>
         </section>
@@ -246,7 +250,7 @@
                 <h3 class="category-title">Equipment Guides</h3>
                 <p class="category-description">Technical documentation for MRI equipment, peripherals, and response systems. Includes setup procedures and calibration guides.</p>
                 <div style="margin-top: 1rem;">
-                    <span style="color: var(--color-electric-blue); font-size: 0.875rem;">4 guides available →</span>
+                    <span style="color: var(--color-electric-blue); font-size: 0.875rem; font-weight: 500;">4 guides available →</span>
                 </div>
             </div>
             
@@ -255,7 +259,7 @@
                 <h3 class="category-title">Operating Procedures</h3>
                 <p class="category-description">Standard operating procedures for scanner operations, data management, and facility protocols.</p>
                 <div style="margin-top: 1rem;">
-                    <span style="color: var(--color-electric-blue); font-size: 0.875rem;">4 procedures documented →</span>
+                    <span style="color: var(--color-electric-blue); font-size: 0.875rem; font-weight: 500;">4 procedures documented →</span>
                 </div>
             </div>
             
@@ -264,7 +268,7 @@
                 <h3 class="category-title">Troubleshooting</h3>
                 <p class="category-description">Quick solutions for common MRI scanner issues, equipment problems, and patient-related challenges.</p>
                 <div style="margin-top: 1rem;">
-                    <span style="color: var(--color-electric-blue); font-size: 0.875rem;">7 common issues documented →</span>
+                    <span style="color: var(--color-electric-blue); font-size: 0.875rem; font-weight: 500;">7 common issues documented →</span>
                 </div>
             </div>
             
@@ -272,7 +276,7 @@
         
         <!-- Emergency Procedures Section -->
         <section class="glass-card mt-xl" style="border-left: 4px solid var(--color-error-red);">
-            <h2 style="color: var(--color-clinical-white); margin-bottom: 1rem;">Emergency Procedures</h2>
+            <h2 style="color: #1A1F2E; margin-bottom: 1rem;">Emergency Procedures</h2>
             <div style="display: flex; gap: 2rem; flex-wrap: wrap;">
                 <button class="btn btn-danger" onclick="showModal('emergencyModal')">
                     🚨 Emergency Shutdown
@@ -285,8 +289,8 @@
         
         <!-- Footer -->
         <footer class="glass-card mt-xl" style="text-align: center;">
-            <div style="color: var(--color-dark-text-secondary);">
-                <strong style="color: var(--color-clinical-white);">Neuroscape Imaging Core</strong><br>
+            <div style="color: #4A5568;">
+                <strong style="color: #1A1F2E;">Neuroscape Imaging Core</strong><br>
                 University of California, San Francisco<br>
                 <span style="color: var(--color-electric-blue);">Neuroscape Center</span><br>
                 <div style="margin-top: 1rem; font-size: 0.875rem;">
@@ -302,30 +306,28 @@
         <div class="modal-backdrop" onclick="closeModal(event)"></div>
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title">Emergency Shutdown Procedure</h2>
+                <h2 class="modal-title">Emergency Procedures</h2>
                 <button class="modal-close" onclick="closeModal(event)">×</button>
             </div>
             <div class="modal-body">
-                <div class="progress-container">
-                    <div class="progress-steps">
-                        <div class="progress-step active">
-                            <div class="progress-circle">1</div>
-                            <div class="progress-label">Press Emergency Stop</div>
-                        </div>
-                        <div class="progress-step">
-                            <div class="progress-circle">2</div>
-                            <div class="progress-label">Evacuate Patient</div>
-                        </div>
-                        <div class="progress-step">
-                            <div class="progress-circle">3</div>
-                            <div class="progress-label">Call Support</div>
-                        </div>
-                    </div>
-                </div>
-                <div style="margin-top: 2rem; color: var(--color-dark-text-secondary);">
-                    <p><strong>Step 1:</strong> Press the red emergency stop button on the scanner console.</p>
-                    <p><strong>Step 2:</strong> Safely evacuate the patient from the scanner room.</p>
-                    <p><strong>Step 3:</strong> Contact technical support immediately at (415) 555-0123.</p>
+                <div style="color: #2D3748;">
+                    <h3 style="color: var(--color-error-red); margin-bottom: 1rem;">For Participant Medical Emergencies:</h3>
+                    <ul style="list-style: disc; padding-left: 1.5rem; margin-bottom: 1.5rem;">
+                        <li style="margin-bottom: 0.5rem;">Hit the <strong>red stop button</strong> on the scanner console to end any current scan</li>
+                        <li style="margin-bottom: 0.5rem;">One staff member coordinates participant care, the other dials 911 and provides the following address: <strong>"675 Nelson Rising Ln, 4th St entrance"</strong></li>
+                        <li style="margin-bottom: 0.5rem;">Get the participant out of the scanner room and into the hallway ASAP</li>
+                    </ul>
+
+                    <h3 style="color: var(--color-error-red); margin-bottom: 1rem;">For Magnetic Emergency:</h3>
+                    <ul style="list-style: disc; padding-left: 1.5rem; margin-bottom: 1.5rem;">
+                        <li style="margin-bottom: 0.5rem;">If the participant's life or limb is at stake, hit the <strong>quench button</strong></li>
+                        <li style="margin-bottom: 0.5rem;">If the participant is trapped but not at risk, <strong>do not hit the quench button</strong></li>
+                    </ul>
+
+                    <h3 style="color: var(--color-error-red); margin-bottom: 1rem;">In the Event of Earthquake, Flood, Fire, or Electrical Arcing:</h3>
+                    <ul style="list-style: disc; padding-left: 1.5rem;">
+                        <li>Hit the <strong>emergency power off</strong></li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -348,7 +350,7 @@
                         </div>
                         <div class="accordion-content" style="max-height: 200px;">
                             <div class="accordion-body">
-                                <p>24/7 Hotline: <strong>(415) 555-0123</strong></p>
+                                <p>24/7 Hotline: <strong>Call Jonathan or Lara</strong></p>
                                 <p>Email: support@neuroscape.ucsf.edu</p>
                             </div>
                         </div>
@@ -361,7 +363,7 @@
                         <div class="accordion-content">
                             <div class="accordion-body">
                                 <p>Emergency: <strong>911</strong></p>
-                                <p>UCSF Medical: <strong>(415) 476-1000</strong></p>
+                                <p>UCSF Medical: <strong>Call Jonathan or Lara</strong></p>
                             </div>
                         </div>
                     </div>

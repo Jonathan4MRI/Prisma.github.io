@@ -15,10 +15,12 @@
     --color-glass-border: rgba(0, 102, 204, 0.15);
     
     /* Light Theme Colors */
-    --color-text-primary: #1A2B3D;
+    --color-text-primary: #2D3748;
     --color-text-secondary: #4A5568;
     --color-text-light: #718096;
     --color-border-light: rgba(0, 102, 204, 0.1);
+    --color-dark-text-primary: #2D3748;
+    --color-dark-text-secondary: #4A5568;
     
     /* Typography */
     --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
@@ -62,9 +64,11 @@
 [data-theme="dark"] {
     --color-bg: #0A0E1B;
     --color-surface: #1A1F36;
-    --color-text: #E4E7EC;
-    --color-text-secondary: #9CA3AF;
-    --color-border: rgba(255, 255, 255, 0.1);
+    --color-text: #2D3748;
+    --color-text-secondary: #4A5568;
+    --color-border: rgba(0, 0, 0, 0.1);
+    --color-dark-text-primary: #2D3748;
+    --color-dark-text-secondary: #4A5568;
 }
 
 /* Base Styles */
@@ -160,7 +164,7 @@ body {
 .navbar-title {
     font-size: 1.25rem;
     font-weight: 600;
-    color: var(--color-text-primary);
+    color: #1A1F2E;
 }
 
 .navbar-nav {
@@ -170,7 +174,7 @@ body {
 }
 
 .nav-link {
-    color: var(--color-text-secondary);
+    color: #2D3748;
     text-decoration: none;
     padding: var(--spacing-sm) var(--spacing-md);
     border-radius: var(--radius-sm);
@@ -348,14 +352,14 @@ body {
 }
 
 .category-title {
-    color: var(--color-text-primary);
+    color: #1A1F2E;
     font-size: 1.25rem;
     font-weight: 600;
     margin-bottom: var(--spacing-sm);
 }
 
 .category-description {
-    color: var(--color-text-secondary);
+    color: #4A5568;
     font-size: 0.875rem;
     line-height: 1.5;
 }

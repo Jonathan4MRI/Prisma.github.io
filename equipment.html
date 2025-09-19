@@ -191,7 +191,11 @@
                 <li><a href="equipment.html" class="nav-link active">Equipment</a></li>
                 <li><a href="troubleshooting.html" class="nav-link">Troubleshooting</a></li>
             </ul>
-            
+
+            <button class="btn btn-danger" onclick="showModal('emergencyModal')" style="position: absolute; left: 50%; transform: translateX(-50%); font-weight: 600; padding: 0.5rem 1.5rem; background: var(--color-error-red); border: none; box-shadow: 0 2px 10px rgba(255, 0, 0, 0.3);">
+                🚨 EMERGENCY SHUTDOWN
+            </button>
+
         </div>
     </nav>
     
@@ -200,7 +204,7 @@
         <!-- Hero Section -->
         <div class="equipment-hero">
             <h1 class="equipment-title">Equipment Guides</h1>
-            <p style="color: var(--color-dark-text-secondary); font-size: 1.1rem;">
+            <p style="color: #4A5568; font-size: 1.1rem;">
                 Comprehensive documentation for MRI equipment and peripheral systems
             </p>
         </div>
@@ -359,7 +363,7 @@
                     </div>
                     <div style="background: rgba(255, 165, 0, 0.1); border: 1px solid var(--color-warning-amber); border-radius: 0.5rem; padding: 1rem; margin: 1rem 0;">
                         <p style="color: var(--color-warning-amber); font-weight: 500; margin-bottom: 0.5rem;">⚠ Important Note</p>
-                        <p style="color: var(--color-dark-text-secondary); font-size: 0.875rem;">
+                        <p style="color: #4A5568; font-size: 0.875rem;">
                             Ensure mirror alignment is checked before each session. Misalignment can affect stimulus presentation quality.
                         </p>
                     </div>
@@ -378,7 +382,7 @@
         <!-- Tips Section -->
         <section class="glass-card mt-xl">
             <h2 style="color: black; margin-bottom: 1.5rem;">Equipment Best Practices</h2>
-            <ul style="list-style: disc; padding-left: 1.5rem; color: var(--color-dark-text-secondary);">
+            <ul style="list-style: disc; padding-left: 1.5rem; color: #2D3748;">
                 <li style="margin-bottom: 1rem;">
                     <strong>fORP System:</strong> Please coil the button box cord and place it front left side of the scanner room. Make sure the buttons are face up.
                 </li>
@@ -393,9 +397,9 @@
         
         <!-- Footer -->
         <footer class="glass-card mt-xl" style="text-align: center;">
-            <div style="color: var(--color-dark-text-secondary);">
-                <strong style="color: var(--color-clinical-white);">Equipment Support</strong><br>
-                For technical assistance: (415) 555-0123<br>
+            <div style="color: #4A5568;">
+                <strong style="color: #1A1F2E;">Equipment Support</strong><br>
+                For technical assistance: Call Jonathan or Lara<br>
                 <a href="mailto:equipment@neuroscape.ucsf.edu" style="color: var(--color-electric-blue); text-decoration: none;">
                     equipment@neuroscape.ucsf.edu
                 </a>
@@ -405,7 +409,39 @@
     
     <!-- Toast Container -->
     <div id="toastContainer" class="toast-container"></div>
-    
+
+    <!-- Emergency Modal -->
+    <div id="emergencyModal" class="modal">
+        <div class="modal-backdrop" onclick="closeModal(event)"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Emergency Procedures</h2>
+                <button class="modal-close" onclick="closeModal(event)">×</button>
+            </div>
+            <div class="modal-body">
+                <div style="color: #2D3748;">
+                    <h3 style="color: var(--color-error-red); margin-bottom: 1rem;">For Participant Medical Emergencies:</h3>
+                    <ul style="list-style: disc; padding-left: 1.5rem; margin-bottom: 1.5rem;">
+                        <li style="margin-bottom: 0.5rem;">Hit the <strong>red stop button</strong> on the scanner console to end any current scan</li>
+                        <li style="margin-bottom: 0.5rem;">One staff member coordinates participant care, the other dials 911 and provides the following address: <strong>"675 Nelson Rising Ln, 4th St entrance"</strong></li>
+                        <li style="margin-bottom: 0.5rem;">Get the participant out of the scanner room and into the hallway ASAP</li>
+                    </ul>
+
+                    <h3 style="color: var(--color-error-red); margin-bottom: 1rem;">For Magnetic Emergency:</h3>
+                    <ul style="list-style: disc; padding-left: 1.5rem; margin-bottom: 1.5rem;">
+                        <li style="margin-bottom: 0.5rem;">If the participant's life or limb is at stake, hit the <strong>quench button</strong></li>
+                        <li style="margin-bottom: 0.5rem;">If the participant is trapped but not at risk, <strong>do not hit the quench button</strong></li>
+                    </ul>
+
+                    <h3 style="color: var(--color-error-red); margin-bottom: 1rem;">In the Event of Earthquake, Flood, Fire, or Electrical Arcing:</h3>
+                    <ul style="list-style: disc; padding-left: 1.5rem;">
+                        <li>Hit the <strong>emergency power off</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Scripts -->
     <script src="js/main.js"></script>
     <script>
