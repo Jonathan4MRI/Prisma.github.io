@@ -5,7 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Neuroscape Imaging Core - MRI Operations Hub</title>
     <meta name="description" content="Advanced MRI scanner operations, equipment guides, and troubleshooting resources for the Neuroscape Imaging Core at UCSF">
-    
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="shortcut icon" type="image/png" href="logo.png">
+
     <!-- Preconnect to external resources -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -156,15 +160,9 @@
             <ul class="navbar-nav">
                 <li><a href="index.html" class="nav-link active">Home</a></li>
                 <li><a href="equipment.html" class="nav-link">Equipment</a></li>
-                <li><a href="procedures.html" class="nav-link">Procedures</a></li>
                 <li><a href="troubleshooting.html" class="nav-link">Troubleshooting</a></li>
-                <li><a href="#resources" class="nav-link">Resources</a></li>
             </ul>
             
-            <div class="navbar-actions">
-                <button id="themeToggle" class="btn btn-secondary" aria-label="Toggle theme">🌙</button>
-                <button id="menuToggle" class="btn btn-secondary mobile-only" aria-label="Toggle menu">☰</button>
-            </div>
         </div>
     </nav>
     
@@ -198,7 +196,7 @@
             <!-- CTA Button for Scanning Requests -->
             <div style="margin: 2rem 0;">
                 <button class="btn btn-primary btn-lg" onclick="openContactForm()" style="font-size: 1.1rem; padding: 1rem 2rem; box-shadow: 0 6px 20px rgba(0, 102, 204, 0.3);">
-                    🔬 Want to Scan at the NIC?
+                    Want to scan at the NIC?
                 </button>
             </div>
             
@@ -228,15 +226,10 @@
                     <div class="quick-card-title">Participant Comfort Guide</div>
                     <div style="font-size: 0.875rem; opacity: 0.8;">Tips for participant comfort</div>
                 </a>
-                <a href="Scanner Troubleshooting Guide - Neuroscape - Wiki@UCSF.html" class="quick-card">
+                <a href="troubleshooting.html" class="quick-card">
                     <div class="quick-card-icon">◉</div>
                     <div class="quick-card-title">Troubleshooting</div>
                     <div style="font-size: 0.875rem; opacity: 0.8;">Common issues & fixes</div>
-                </a>
-                <a href="DICOM Transfer Guide - Neuroscape - Wiki@UCSF.html" class="quick-card">
-                    <div class="quick-card-icon">◉</div>
-                    <div class="quick-card-title">DICOM Transfer</div>
-                    <div style="font-size: 0.875rem; opacity: 0.8;">Data export procedures</div>
                 </a>
                 <a href="fORP - Neuroscape - Wiki@UCSF.html" class="quick-card">
                     <div class="quick-card-icon">◉</div>
@@ -267,22 +260,14 @@
             </div>
             
             <div class="category-card" data-category="troubleshooting" onclick="window.location.href='troubleshooting.html'">
-                <div class="category-icon">▣</div>
+                <div class="category-icon">⚠️</div>
                 <h3 class="category-title">Troubleshooting</h3>
-                <p class="category-description">Diagnostic tools and solutions for scanner errors, equipment issues, and common problems.</p>
+                <p class="category-description">Quick solutions for common MRI scanner issues, equipment problems, and patient-related challenges.</p>
                 <div style="margin-top: 1rem;">
-                    <span style="color: var(--color-electric-blue); font-size: 0.875rem;">2 troubleshooting guides →</span>
+                    <span style="color: var(--color-electric-blue); font-size: 0.875rem;">7 common issues documented →</span>
                 </div>
             </div>
             
-            <div class="category-card" data-category="resources" id="resources">
-                <div class="category-icon">📚</div>
-                <h3 class="category-title">Resources</h3>
-                <p class="category-description">Training materials, patient preparation guides, and facility information for staff and researchers.</p>
-                <div style="margin-top: 1rem;">
-                    <span style="color: var(--color-electric-blue); font-size: 0.875rem;">2 resources available →</span>
-                </div>
-            </div>
         </div>
         
         <!-- Emergency Procedures Section -->
@@ -305,8 +290,7 @@
                 University of California, San Francisco<br>
                 <span style="color: var(--color-electric-blue);">Neuroscape Center</span><br>
                 <div style="margin-top: 1rem; font-size: 0.875rem;">
-                    <span>Press Ctrl+K to search</span> • 
-                    <span>Alt+T for theme</span> • 
+                    <span>Press Ctrl+K to search</span> •
                     <span>Ctrl+/ for help</span>
                 </div>
             </div>

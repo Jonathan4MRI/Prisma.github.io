@@ -3,7 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MRI Suite Troubleshooting Guide - UCSF Neuroscape</title>
+    <title>Prisma Troubleshooting Guide - UCSF Neuroscape</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="shortcut icon" type="image/png" href="logo.png">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Shared styles -->
+    <link rel="stylesheet" href="css/styles.css">
+
     <style>
         * {
             margin: 0;
@@ -11,23 +22,10 @@
             box-sizing: border-box;
         }
 
-        :root {
-            --primary-dark: #0A1628;
-            --primary-light: #1E293B;
-            --accent-blue: #00D9FF;
-            --accent-green: #00C896;
-            --warning: #FFA500;
-            --danger: #FF4444;
-            --text-primary: #FFFFFF;
-            --text-secondary: #94A3B8;
-            --glass-bg: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 255, 255, 0.1);
-        }
-
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'SF Pro Display', 'Segoe UI', sans-serif;
-            background: linear-gradient(135deg, #0A1628 0%, #1E293B 100%);
-            color: var(--text-primary);
+            font-family: var(--font-primary);
+            background: linear-gradient(135deg, var(--color-clinical-white) 0%, var(--color-light-gray) 100%);
+            color: var(--color-text-primary);
             min-height: 100vh;
             line-height: 1.6;
         }
@@ -48,14 +46,13 @@
             font-size: 3rem;
             font-weight: 700;
             margin-bottom: 1rem;
-            background: linear-gradient(135deg, #00D9FF 0%, #00C896 100%);
+            background: linear-gradient(135deg, var(--color-primary-blue) 0%, var(--color-electric-blue) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 40px rgba(0, 217, 255, 0.3);
         }
 
         .subtitle {
-            color: var(--text-secondary);
+            color: var(--color-text-secondary);
             font-size: 1.2rem;
         }
 
@@ -68,23 +65,24 @@
         .search-input {
             width: 100%;
             padding: 1.2rem 3rem;
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
+            background: var(--color-clinical-white);
+            border: 1px solid var(--color-glass-border);
             border-radius: 1rem;
-            color: var(--text-primary);
+            color: var(--color-text-primary);
             font-size: 1.1rem;
             backdrop-filter: blur(10px);
             transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 102, 204, 0.05);
         }
 
         .search-input::placeholder {
-            color: var(--text-secondary);
+            color: var(--color-text-secondary);
         }
 
         .search-input:focus {
             outline: none;
-            border-color: var(--accent-blue);
-            box-shadow: 0 0 30px rgba(0, 217, 255, 0.2);
+            border-color: var(--color-electric-blue);
+            box-shadow: 0 0 0 3px rgba(0, 149, 255, 0.1), 0 2px 10px rgba(0, 102, 204, 0.1);
         }
 
         .search-icon {
@@ -92,7 +90,7 @@
             left: 1rem;
             top: 50%;
             transform: translateY(-50%);
-            color: var(--text-secondary);
+            color: var(--color-text-secondary);
         }
 
         .quick-filters {
@@ -105,24 +103,26 @@
 
         .filter-chip {
             padding: 0.5rem 1rem;
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
+            background: var(--color-clinical-white);
+            border: 1px solid var(--color-glass-border);
             border-radius: 2rem;
             cursor: pointer;
             transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
+            color: var(--color-text-secondary);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
         }
 
         .filter-chip:hover {
-            background: rgba(0, 217, 255, 0.1);
-            border-color: var(--accent-blue);
+            background: var(--color-light-blue);
+            border-color: var(--color-electric-blue);
             transform: translateY(-2px);
+            color: var(--color-primary-blue);
         }
 
         .filter-chip.active {
-            background: rgba(0, 217, 255, 0.2);
-            border-color: var(--accent-blue);
-            color: var(--accent-blue);
+            background: var(--color-primary-blue);
+            border-color: var(--color-primary-blue);
+            color: white;
         }
 
         .problems-container {
@@ -132,23 +132,25 @@
         }
 
         .problem-card {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
+            background: var(--color-clinical-white);
+            border: 1px solid var(--color-glass-border);
             border-radius: 1rem;
             overflow: hidden;
             backdrop-filter: blur(10px);
             transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 102, 204, 0.05);
         }
 
         .problem-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 102, 204, 0.15);
+            border-color: var(--color-electric-blue);
         }
 
         .problem-header {
             padding: 1.5rem;
-            background: linear-gradient(135deg, rgba(255, 68, 68, 0.1) 0%, rgba(255, 165, 0, 0.1) 100%);
-            border-bottom: 1px solid var(--glass-border);
+            background: linear-gradient(135deg, var(--color-light-blue) 0%, var(--color-sky-blue) 100%);
+            border-bottom: 1px solid var(--color-glass-border);
             cursor: pointer;
             display: flex;
             justify-content: space-between;
@@ -164,7 +166,7 @@
         .problem-icon {
             width: 40px;
             height: 40px;
-            background: linear-gradient(135deg, var(--danger) 0%, var(--warning) 100%);
+            background: linear-gradient(135deg, var(--color-warning-amber) 0%, var(--color-error-red) 100%);
             border-radius: 0.5rem;
             display: flex;
             align-items: center;
@@ -175,11 +177,12 @@
         .problem-text {
             font-size: 1.1rem;
             font-weight: 600;
+            color: var(--color-text-primary);
         }
 
         .expand-icon {
             transition: transform 0.3s ease;
-            color: var(--text-secondary);
+            color: var(--color-text-secondary);
         }
 
         .problem-card.expanded .expand-icon {
@@ -206,7 +209,7 @@
             margin-bottom: 1.5rem;
             padding: 1rem;
             background: rgba(0, 200, 150, 0.05);
-            border-left: 3px solid var(--accent-green);
+            border-left: 3px solid var(--color-medical-green);
             border-radius: 0.5rem;
             animation: slideInRight 0.5s ease;
         }
@@ -214,8 +217,8 @@
         .step-number {
             width: 30px;
             height: 30px;
-            background: var(--accent-green);
-            color: var(--primary-dark);
+            background: var(--color-medical-green);
+            color: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -227,42 +230,48 @@
         .step-content {
             flex: 1;
             line-height: 1.8;
+            color: var(--color-text-primary);
         }
 
         .category-badge {
             display: inline-block;
             padding: 0.25rem 0.75rem;
-            background: rgba(0, 217, 255, 0.1);
-            color: var(--accent-blue);
+            background: var(--color-light-blue);
+            color: var(--color-primary-blue);
             border-radius: 1rem;
             font-size: 0.85rem;
             margin-left: 1rem;
+            font-weight: 500;
         }
 
         .emergency-contact {
             margin-top: 3rem;
             padding: 2rem;
-            background: linear-gradient(135deg, rgba(255, 68, 68, 0.1) 0%, rgba(255, 165, 0, 0.05) 100%);
-            border: 2px solid var(--danger);
+            background: linear-gradient(135deg, rgba(255, 165, 0, 0.05) 0%, rgba(255, 68, 68, 0.05) 100%);
+            border: 2px solid var(--color-error-red);
             border-radius: 1rem;
             text-align: center;
             animation: pulse 2s infinite;
         }
 
+        .emergency-contact h2 {
+            color: var(--color-text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .emergency-contact p {
+            color: var(--color-text-secondary);
+        }
+
         .contact-button {
             display: inline-block;
             padding: 1rem 2rem;
-            background: linear-gradient(135deg, var(--danger) 0%, var(--warning) 100%);
+            background: linear-gradient(135deg, var(--color-error-red) 0%, var(--color-warning-amber) 100%);
             color: white;
-            text-decoration: none;
             border-radius: 0.5rem;
             font-weight: bold;
             margin-top: 1rem;
-            transition: transform 0.3s ease;
-        }
-
-        .contact-button:hover {
-            transform: scale(1.05);
+            cursor: default;
         }
 
         @keyframes fadeInDown {
@@ -309,10 +318,10 @@
 
         @keyframes pulse {
             0%, 100% {
-                box-shadow: 0 0 20px rgba(255, 68, 68, 0.2);
+                box-shadow: 0 0 20px rgba(255, 68, 68, 0.1);
             }
             50% {
-                box-shadow: 0 0 40px rgba(255, 68, 68, 0.4);
+                box-shadow: 0 0 40px rgba(255, 68, 68, 0.2);
             }
         }
 
@@ -336,9 +345,26 @@
     </style>
 </head>
 <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="index.html" class="navbar-brand">
+                <div class="navbar-logo">NIC</div>
+                <span class="navbar-title">Neuroscape Imaging Core</span>
+            </a>
+
+            <ul class="navbar-nav">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="equipment.html" class="nav-link">Equipment</a></li>
+                <li><a href="troubleshooting.html" class="nav-link active">Troubleshooting</a></li>
+            </ul>
+
+        </div>
+    </nav>
+
     <div class="container">
-        <header>
-            <h1>MRI Suite Troubleshooting</h1>
+        <header style="margin-top: 80px;">
+            <h1>Prisma Troubleshooting</h1>
             <p class="subtitle">Quick solutions to common problems</p>
         </header>
 
@@ -435,7 +461,7 @@
                         <div class="solution-step">
                             <div class="step-number">1</div>
                             <div class="step-content">
-                                Call Jonathan. There are many positioning tips and tricks to get their head and angle positioned better. A few millimeters makes a big difference here.
+                                Call Jonathan or Lara. There are many positioning tips and tricks to get their head and angle positioned better. A few millimeters makes a big difference here.
                             </div>
                         </div>
                         <div class="solution-step">
@@ -487,7 +513,7 @@
                         <div class="solution-step">
                             <div class="step-number">1</div>
                             <div class="step-content">
-                                Call Jonathan immediately. There are many tips and tricks we can try to help the participant feel more comfortable and complete the scan successfully.
+                                Call Jonathan or Lara immediately. There are many tips and tricks we can try to help the participant feel more comfortable and complete the scan successfully.
                             </div>
                         </div>
                     </div>
@@ -556,7 +582,7 @@
         <div class="emergency-contact">
             <h2>Need Immediate Assistance?</h2>
             <p>If you're experiencing an issue not listed here or need urgent help:</p>
-            <a href="tel:jonathan" class="contact-button">📞 Call Jonathan</a>
+            <div class="contact-button">📞 Call Jonathan or Lara</div>
         </div>
     </div>
 
@@ -612,5 +638,8 @@
         // Set 'All Issues' as active by default
         document.querySelector('[data-category="all"]').classList.add('active');
     </script>
+
+    <!-- Main JavaScript -->
+    <script src="js/main.js"></script>
 </body>
 </html>
