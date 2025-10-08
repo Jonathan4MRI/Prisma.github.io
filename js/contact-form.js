@@ -2,7 +2,13 @@
 
 // Initialize EmailJS
 (function() {
-    emailjs.init('mh447BG7YXasimZK7');
+    console.log('Initializing EmailJS...');
+    try {
+        emailjs.init('mh447BG7YXasimZK7');
+        console.log('EmailJS initialized successfully with public key: mh447BG7YXasimZK7');
+    } catch (error) {
+        console.error('Failed to initialize EmailJS:', error);
+    }
 })();
 
 // Form state management
@@ -167,69 +173,118 @@ function formatEmailContent(data) {
 // Handle form submission
 async function handleFormSubmit(event) {
     event.preventDefault();
-    
+    console.log('=== FORM SUBMISSION STARTED ===');
+
     const form = event.target;
     const submitBtn = document.getElementById('submitBtn');
     const submitBtnText = document.getElementById('submitBtnText');
     const submitBtnLoader = document.getElementById('submitBtnLoader');
-    
+
     // Validate form
+    console.log('Validating form...');
     if (!validateForm(form)) {
+        console.error('Form validation failed');
         showToast('Please fill in all required fields correctly.', 'error');
         return;
     }
-    
+    console.log('Form validation passed');
+
     // Check if already submitting
-    if (isSubmitting) return;
-    
+    if (isSubmitting) {
+        console.log('Already submitting, aborting duplicate submission');
+        return;
+    }
+
     isSubmitting = true;
     submitBtn.disabled = true;
     submitBtnText.style.display = 'none';
     submitBtnLoader.style.display = 'inline';
-    
+
     // Collect form data
+    console.log('Collecting form data...');
     const formData = new FormData(form);
     const data = {};
     formData.forEach((value, key) => {
         if (key !== 'website') { // Exclude honeypot
             data[key] = value;
+            console.log(`  ${key}: ${value}`);
         }
     });
-    
+    console.log('Form data collected:', data);
+
     try {
         // Format email content
+        console.log('Formatting email content...');
         const emailParams = formatEmailContent(data);
-        
+        console.log('Email parameters prepared:', emailParams);
+
+        // Check if EmailJS is initialized
+        if (typeof emailjs === 'undefined') {
+            throw new Error('EmailJS is not loaded. Please check your internet connection.');
+        }
+
+        console.log('Sending email via EmailJS...');
+        console.log('  Service ID:', 'service_sayp5sn');
+        console.log('  Template ID:', 'template_1f83ag8');
+
         // Send email using EmailJS
         const response = await emailjs.send(
             'service_sayp5sn',
             'template_1f83ag8',
             emailParams
         );
-        
+
+        console.log('EmailJS Response:', response);
+
         if (response.status === 200) {
             // Success
+            console.log('Email sent successfully!');
             showToast(`Request submitted successfully! Reference: ${emailParams.reference_number}`, 'success');
-            
+
             // Clear form and draft
             form.reset();
             clearFormDraft();
-            
+
             // Close modal after delay
             setTimeout(() => {
                 closeContactForm();
             }, 2000);
         } else {
-            throw new Error('Failed to send email');
+            throw new Error(`EmailJS returned status: ${response.status}`);
         }
     } catch (error) {
-        console.error('Error submitting form:', error);
-        showToast('Failed to submit request. Please try again or contact us directly.', 'error');
+        console.error('=== SUBMISSION ERROR ===');
+        console.error('Error details:', error);
+        console.error('Error message:', error.message || error.text || 'Unknown error');
+        console.error('Error stack:', error.stack);
+
+        // Provide more specific error messages
+        let errorMessage = 'Failed to submit request. ';
+
+        if (error.message && error.message.includes('EmailJS is not loaded')) {
+            errorMessage += 'Email service is not loaded. Please refresh the page.';
+        } else if (error.status === 412) {
+            errorMessage += 'Email service configuration error. Please contact support.';
+        } else if (error.status === 422) {
+            errorMessage += 'Invalid email template configuration. Please contact support.';
+        } else if (error.text && error.text.includes('The Public Key is invalid')) {
+            errorMessage += 'Email service authentication failed. Please contact support.';
+        } else if (!navigator.onLine) {
+            errorMessage += 'No internet connection. Please check your network.';
+        } else {
+            errorMessage += 'Please try again or contact us directly.';
+        }
+
+        showToast(errorMessage, 'error');
+
+        // Log to console for debugging
+        console.error('Full error object:', error);
     } finally {
         isSubmitting = false;
         submitBtn.disabled = false;
         submitBtnText.style.display = 'inline';
         submitBtnLoader.style.display = 'none';
+        console.log('=== FORM SUBMISSION COMPLETED ===');
     }
 }
 
@@ -279,11 +334,69 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// SETUP INSTRUCTIONS:
-// 1. Sign up for a free EmailJS account at https://www.emailjs.com/
-// 2. Create a new email service (Gmail, Outlook, etc.)
-// 3. Create an email template with the variables used in formatEmailContent()
-// 4. Replace 'YOUR_PUBLIC_KEY' in the init function with your Public Key
-// 5. Replace 'YOUR_SERVICE_ID' with your Service ID
-// 6. Replace 'YOUR_TEMPLATE_ID' with your Template ID
-// 7. Update the email template to send to your desired email address
+// TEST FUNCTION - Run this in browser console to test EmailJS configuration
+window.testEmailJS = async function() {
+    console.log('=== TESTING EMAILJS CONFIGURATION ===');
+
+    // Check if EmailJS is loaded
+    if (typeof emailjs === 'undefined') {
+        console.error('❌ EmailJS library is not loaded');
+        return false;
+    }
+    console.log('✅ EmailJS library is loaded');
+
+    // Test with minimal data
+    const testData = {
+        reference_number: 'TEST-' + Date.now(),
+        submission_date: new Date().toLocaleString(),
+        name: 'Test User',
+        email: 'test@example.com',
+        phone: '555-0123',
+        institution: 'Test Institution',
+        project_title: 'Test Project',
+        principal_investigator: 'Test PI',
+        participants: '5',
+        description: 'This is a test submission',
+        duration: '1 hour',
+        timeline: 'ASAP',
+        irb_status: 'Approved',
+        mri_experience: 'Yes',
+        special_requirements: 'None',
+        reply_to: 'test@example.com',
+        from_name: 'Test User'
+    };
+
+    console.log('Sending test email with data:', testData);
+
+    try {
+        const response = await emailjs.send(
+            'service_sayp5sn',
+            'template_1f83ag8',
+            testData
+        );
+        console.log('✅ Test email sent successfully!', response);
+        console.log('Response status:', response.status);
+        console.log('Response text:', response.text);
+        return true;
+    } catch (error) {
+        console.error('❌ Failed to send test email');
+        console.error('Error:', error);
+        if (error.status) {
+            console.error('Error Status:', error.status);
+            console.error('Error Text:', error.text);
+
+            // Provide specific error guidance
+            if (error.status === 412) {
+                console.error('→ This usually means the service ID is incorrect or the service is not active');
+            } else if (error.status === 422) {
+                console.error('→ This usually means the template ID is incorrect or template variables don\'t match');
+            } else if (error.status === 401) {
+                console.error('→ This usually means the public key is incorrect');
+            }
+        }
+        return false;
+    }
+};
+
+console.log('📧 EmailJS Test Function Available!');
+console.log('Run "testEmailJS()" in the console to test your email configuration');
