@@ -1,10 +1,8 @@
 // Contact Form Functionality for NIC Scanner Requests
 
-// Initialize EmailJS (you'll need to replace with your actual IDs)
+// Initialize EmailJS
 (function() {
-    // IMPORTANT: Replace 'YOUR_SERVICE_ID' with your EmailJS service ID
-    // Get it from: https://dashboard.emailjs.com/admin
-    emailjs.init('YOUR_PUBLIC_KEY');
+    emailjs.init('mh447BG7YXasimZK7');
 })();
 
 // Form state management
@@ -203,10 +201,9 @@ async function handleFormSubmit(event) {
         const emailParams = formatEmailContent(data);
         
         // Send email using EmailJS
-        // IMPORTANT: Replace 'YOUR_SERVICE_ID' and 'YOUR_TEMPLATE_ID' with actual values
         const response = await emailjs.send(
-            'YOUR_SERVICE_ID',
-            'YOUR_TEMPLATE_ID',
+            'service_sayp5sn',
+            'template_1f83ag8',
             emailParams
         );
         
