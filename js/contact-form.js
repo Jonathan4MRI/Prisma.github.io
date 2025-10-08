@@ -140,17 +140,17 @@ function generateReferenceNumber() {
 // Format form data for email
 function formatEmailContent(data) {
     const referenceNumber = generateReferenceNumber();
-    
+
     return {
         reference_number: referenceNumber,
         submission_date: new Date().toLocaleString(),
-        
+
         // Contact Information
         name: data.name,
         email: data.email,
         phone: data.phone || 'Not provided',
         institution: data.institution,
-        
+
         // Project Details
         project_title: data.projectTitle,
         principal_investigator: data.pi,
@@ -158,15 +158,15 @@ function formatEmailContent(data) {
         description: data.description,
         duration: data.duration,
         timeline: data.timeline || 'Not specified',
-        
+
         // Additional Information
         irb_status: data.irbStatus,
         mri_experience: data.experience,
         special_requirements: data.requirements || 'None',
-        
-        // For the reply
-        reply_to: data.email,
-        from_name: data.name
+
+        // EmailJS specific fields - these are handled specially by EmailJS
+        // Don't include reply_to or from_name as they're causing issues with Outlook
+        // Instead, the email address will be included in the body for easy reply
     };
 }
 
@@ -361,9 +361,7 @@ window.testEmailJS = async function() {
         timeline: 'ASAP',
         irb_status: 'Approved',
         mri_experience: 'Yes',
-        special_requirements: 'None',
-        reply_to: 'test@example.com',
-        from_name: 'Test User'
+        special_requirements: 'None'
     };
 
     console.log('Sending test email with data:', testData);
