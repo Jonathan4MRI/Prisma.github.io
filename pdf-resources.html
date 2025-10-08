@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Resources - Neuroscape Imaging Core</title>
+    <meta name="description" content="PDF Resources, guides, and documentation for the Neuroscape Imaging Core at UCSF">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="shortcut icon" type="image/png" href="logo.png">
+
+    <!-- Preconnect to external resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+
+    <style>
+        .pdf-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            padding-top: 100px;
+        }
+
+        .pdf-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .pdf-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--color-primary-blue), var(--color-electric-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .pdf-subtitle {
+            color: var(--color-text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .pdf-filters {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1.5rem;
+            background: var(--color-clinical-white);
+            border: 1px solid var(--color-glass-border);
+            border-radius: 25px;
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .filter-btn:hover {
+            background: var(--color-electric-blue);
+            color: white;
+            border-color: var(--color-electric-blue);
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(135deg, var(--color-primary-blue), var(--color-electric-blue));
+            color: white;
+            border-color: transparent;
+        }
+
+        .pdf-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .pdf-card {
+            background: var(--color-clinical-white);
+            border: 1px solid var(--color-glass-border);
+            border-radius: 1rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 102, 204, 0.05);
+        }
+
+        .pdf-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 102, 204, 0.15);
+            border-color: var(--color-electric-blue);
+        }
+
+        .pdf-preview {
+            height: 200px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .pdf-preview-icon {
+            font-size: 4rem;
+            color: var(--color-primary-blue);
+            opacity: 0.3;
+        }
+
+        .pdf-preview iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .pdf-info {
+            padding: 1.5rem;
+        }
+
+        .pdf-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--color-primary-blue);
+            margin-bottom: 0.5rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .pdf-description {
+            color: var(--color-text-secondary);
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .pdf-size {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: #f0f8ff;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            color: var(--color-electric-blue);
+            margin-bottom: 1rem;
+        }
+
+        .pdf-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .pdf-btn {
+            flex: 1;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .pdf-btn-preview {
+            background: var(--color-electric-blue);
+            color: white;
+        }
+
+        .pdf-btn-preview:hover {
+            background: var(--color-primary-blue);
+        }
+
+        .pdf-btn-download {
+            background: var(--color-medical-green);
+            color: white;
+        }
+
+        .pdf-btn-download:hover {
+            background: #00a67e;
+        }
+
+        /* PDF Viewer Modal */
+        .pdf-viewer-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 10000;
+            padding: 20px;
+        }
+
+        .pdf-viewer-modal.active {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pdf-viewer-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .pdf-viewer-title {
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .pdf-viewer-controls {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .pdf-viewer-btn {
+            padding: 0.5rem 1rem;
+            background: var(--color-electric-blue);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .pdf-viewer-btn:hover {
+            background: var(--color-primary-blue);
+        }
+
+        .pdf-viewer-close {
+            background: var(--color-error-red);
+        }
+
+        .pdf-viewer-content {
+            flex: 1;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .pdf-viewer-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .category-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: linear-gradient(135deg, var(--color-primary-blue), var(--color-electric-blue));
+            color: white;
+            border-radius: 15px;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .pdf-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pdf-title {
+                font-size: 2rem;
+            }
+
+            .pdf-viewer-header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .pdf-viewer-controls {
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+    </style>
+</head>
+<body data-theme="dark">
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="index.html" class="navbar-brand">
+                <div class="navbar-logo">NIC</div>
+                <span class="navbar-title">Neuroscape Imaging Core</span>
+            </a>
+
+            <ul class="navbar-nav">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="equipment.html" class="nav-link">Equipment</a></li>
+                <li><a href="troubleshooting.html" class="nav-link">Troubleshooting</a></li>
+                <li><a href="pdf-resources.html" class="nav-link active">PDF Resources</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Loading Indicator -->
+    <div id="loader" class="loader-container">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="pdf-container">
+        <!-- Header -->
+        <div class="pdf-header">
+            <h1 class="pdf-title">PDF Resources</h1>
+            <p class="pdf-subtitle">Essential guides, manuals, and documentation for MRI operations</p>
+        </div>
+
+        <!-- Filter Buttons -->
+        <div class="pdf-filters">
+            <button class="filter-btn active" onclick="filterPDFs('all')">All Resources</button>
+            <button class="filter-btn" onclick="filterPDFs('software')">Software Guides</button>
+            <button class="filter-btn" onclick="filterPDFs('equipment')">Equipment Manuals</button>
+            <button class="filter-btn" onclick="filterPDFs('forms')">Forms & Maps</button>
+            <button class="filter-btn" onclick="filterPDFs('analysis')">Analysis Tools</button>
+        </div>
+
+        <!-- PDF Grid -->
+        <div class="pdf-grid" id="pdfGrid">
+            <!-- PDFs will be dynamically loaded here -->
+        </div>
+    </div>
+
+    <!-- PDF Viewer Modal -->
+    <div id="pdfViewerModal" class="pdf-viewer-modal">
+        <div class="pdf-viewer-header">
+            <div class="pdf-viewer-title" id="pdfViewerTitle">PDF Preview</div>
+            <div class="pdf-viewer-controls">
+                <button class="pdf-viewer-btn" onclick="downloadCurrentPDF()">
+                    📥 Download
+                </button>
+                <button class="pdf-viewer-btn pdf-viewer-close" onclick="closePDFViewer()">
+                    ✕ Close
+                </button>
+            </div>
+        </div>
+        <div class="pdf-viewer-content">
+            <iframe id="pdfViewerFrame" class="pdf-viewer-iframe"></iframe>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script>
+        // PDF data with categories and descriptions
+        const pdfData = [
+            {
+                name: "AcqKnowledge Software Guide",
+                filename: "acqknowledge_software_guide.pdf",
+                size: "8.8 MB",
+                category: "software",
+                description: "Comprehensive guide for using AcqKnowledge software with MRI systems"
+            },
+            {
+                name: "ET6 Eye Tracking System",
+                filename: "ET6.pdf",
+                size: "3.5 MB",
+                category: "equipment",
+                description: "Manual for the ET6 eye tracking system setup and operation"
+            },
+            {
+                name: "MRI Prisma Door Seal",
+                filename: "ETS-LINDGREN_Door-Seal_MRI_Prisma.pdf",
+                size: "10.2 MB",
+                category: "equipment",
+                description: "Technical documentation for the ETS-LINDGREN door seal system"
+            },
+            {
+                name: "Eyenal Manual",
+                filename: "Eyenal_Manual.pdf",
+                size: "676 KB",
+                category: "analysis",
+                description: "User manual for Eyenal eye tracking analysis software"
+            },
+            {
+                name: "Fixplot Manual",
+                filename: "Fixplot_Manual.pdf",
+                size: "851 KB",
+                category: "analysis",
+                description: "Documentation for Fixplot fixation analysis tool"
+            },
+            {
+                name: "Fixplot Tutorial",
+                filename: "Fixplot_Tutorial.pdf",
+                size: "5.9 MB",
+                category: "analysis",
+                description: "Step-by-step tutorial for using Fixplot software"
+            },
+            {
+                name: "GT Manual",
+                filename: "GT_Manual.pdf",
+                size: "2.9 MB",
+                category: "software",
+                description: "Gaze tracking software manual and reference guide"
+            },
+            {
+                name: "LRO Documentation",
+                filename: "LRO.pdf",
+                size: "2.0 MB",
+                category: "software",
+                description: "LRO system documentation and user guide"
+            },
+            {
+                name: "Map to NIC (Mission Bay)",
+                filename: "map_to_nic_mb.pdf",
+                size: "897 KB",
+                category: "forms",
+                description: "Directions to the NIC facility at Mission Bay"
+            },
+            {
+                name: "Map to NIC",
+                filename: "map_to_nic.pdf",
+                size: "514 KB",
+                category: "forms",
+                description: "General directions to the NIC facility"
+            },
+            {
+                name: "MRI Screening Form",
+                filename: "Screening_Form.pdf",
+                size: "1.1 MB",
+                category: "forms",
+                description: "Required safety screening form for all MRI participants"
+            },
+            {
+                name: "SDK Documentation",
+                filename: "SDK.pdf",
+                size: "311 KB",
+                category: "software",
+                description: "Software Development Kit documentation"
+            }
+        ];
+
+        let currentPDF = null;
+        let currentFilter = 'all';
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', () => {
+            renderPDFs('all');
+            hideLoader();
+        });
+
+        // Render PDFs based on filter
+        function renderPDFs(filter) {
+            const grid = document.getElementById('pdfGrid');
+            grid.innerHTML = '';
+
+            const filteredPDFs = filter === 'all'
+                ? pdfData
+                : pdfData.filter(pdf => pdf.category === filter);
+
+            if (filteredPDFs.length === 0) {
+                grid.innerHTML = `
+                    <div style="grid-column: 1/-1; text-align: center; padding: 3rem;">
+                        <p style="color: var(--color-text-secondary);">No PDFs found in this category.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            filteredPDFs.forEach(pdf => {
+                const card = createPDFCard(pdf);
+                grid.appendChild(card);
+            });
+
+            // Animate cards
+            const cards = grid.querySelectorAll('.pdf-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'all 0.3s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 50);
+            });
+        }
+
+        // Create PDF card element
+        function createPDFCard(pdf) {
+            const card = document.createElement('div');
+            card.className = 'pdf-card';
+            card.innerHTML = `
+                <div class="pdf-preview" onclick="previewPDF('${pdf.filename}', '${pdf.name}')">
+                    <div class="pdf-preview-icon">📄</div>
+                </div>
+                <div class="pdf-info">
+                    <div class="category-badge">${getCategoryLabel(pdf.category)}</div>
+                    <div class="pdf-name">${pdf.name}</div>
+                    <div class="pdf-description">${pdf.description}</div>
+                    <div class="pdf-size">${pdf.size}</div>
+                    <div class="pdf-actions">
+                        <button class="pdf-btn pdf-btn-preview" onclick="previewPDF('${pdf.filename}', '${pdf.name}')">
+                            👁 Preview
+                        </button>
+                        <a href="PDFS_For_PIs/${pdf.filename}" download class="pdf-btn pdf-btn-download">
+                            📥 Download
+                        </a>
+                    </div>
+                </div>
+            `;
+            return card;
+        }
+
+        // Get category label
+        function getCategoryLabel(category) {
+            const labels = {
+                'software': 'Software',
+                'equipment': 'Equipment',
+                'forms': 'Forms',
+                'analysis': 'Analysis'
+            };
+            return labels[category] || 'General';
+        }
+
+        // Filter PDFs
+        function filterPDFs(category) {
+            currentFilter = category;
+
+            // Update filter buttons
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.toLowerCase().includes(category) ||
+                    (category === 'all' && btn.textContent === 'All Resources')) {
+                    btn.classList.add('active');
+                }
+            });
+
+            // Render filtered PDFs
+            renderPDFs(category);
+        }
+
+        // Preview PDF
+        function previewPDF(filename, title) {
+            currentPDF = filename;
+            const modal = document.getElementById('pdfViewerModal');
+            const frame = document.getElementById('pdfViewerFrame');
+            const titleElement = document.getElementById('pdfViewerTitle');
+
+            titleElement.textContent = title;
+            frame.src = `PDFS_For_PIs/${filename}`;
+            modal.classList.add('active');
+
+            // Show toast
+            if (typeof NeuroscapeApp !== 'undefined' && NeuroscapeApp.showToast) {
+                NeuroscapeApp.showToast('Opening PDF preview...', 'info');
+            }
+        }
+
+        // Close PDF viewer
+        function closePDFViewer() {
+            const modal = document.getElementById('pdfViewerModal');
+            const frame = document.getElementById('pdfViewerFrame');
+
+            modal.classList.remove('active');
+            setTimeout(() => {
+                frame.src = '';
+                currentPDF = null;
+            }, 300);
+        }
+
+        // Download current PDF
+        function downloadCurrentPDF() {
+            if (currentPDF) {
+                const link = document.createElement('a');
+                link.href = `PDFS_For_PIs/${currentPDF}`;
+                link.download = currentPDF;
+                link.click();
+
+                if (typeof NeuroscapeApp !== 'undefined' && NeuroscapeApp.showToast) {
+                    NeuroscapeApp.showToast('Download started!', 'success');
+                }
+            }
+        }
+
+        // Hide loader
+        function hideLoader() {
+            setTimeout(() => {
+                const loader = document.getElementById('loader');
+                if (loader) {
+                    loader.classList.remove('active');
+                }
+            }, 500);
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closePDFViewer();
+            }
+        });
+    </script>
+</body>
+</html>

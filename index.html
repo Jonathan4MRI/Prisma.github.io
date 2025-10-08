@@ -135,13 +135,165 @@
             .hero-title {
                 font-size: 2rem;
             }
-            
+
             .quick-stats {
                 gap: 2rem;
             }
-            
+
             .stat-number {
                 font-size: 2rem;
+            }
+        }
+
+        /* Email Widget Styles */
+        .email-widget {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, var(--color-primary-blue), var(--color-electric-blue));
+            color: white;
+            padding: 15px;
+            border-radius: 30px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 20px rgba(0, 102, 204, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+        }
+
+        .email-widget:hover {
+            transform: translateY(-50%) translateX(-5px);
+            box-shadow: 0 6px 30px rgba(0, 102, 204, 0.5);
+        }
+
+        .email-widget-icon {
+            font-size: 1.5rem;
+            writing-mode: initial;
+        }
+
+        .email-widget-text {
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        /* Email List Modal Styles */
+        .email-list-section {
+            margin-bottom: 2rem;
+        }
+
+        .email-list-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .email-list-card {
+            background: var(--color-clinical-white);
+            border: 1px solid var(--color-glass-border);
+            border-radius: 10px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .email-list-card:hover {
+            box-shadow: 0 4px 15px rgba(0, 102, 204, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .email-list-title {
+            font-weight: 700;
+            color: var(--color-primary-blue);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .email-list-purpose {
+            color: var(--color-text-secondary);
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+
+        .email-list-instructions {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+
+        .email-list-instructions code {
+            background: white;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            color: var(--color-electric-blue);
+            border: 1px solid #e1e8ed;
+        }
+
+        .email-post-grid {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .email-post-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem;
+            background: #f8f9fa;
+            border-radius: 5px;
+        }
+
+        .email-post-label {
+            font-weight: 600;
+            color: var(--color-primary-blue);
+            min-width: 120px;
+        }
+
+        .email-post-link {
+            color: var(--color-electric-blue);
+            text-decoration: none;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+
+        .email-post-link:hover {
+            text-decoration: underline;
+        }
+
+        .btn-sm {
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .email-widget {
+                writing-mode: initial;
+                flex-direction: row;
+                padding: 10px 15px;
+                bottom: 20px;
+                top: auto;
+                right: 20px;
+                transform: none;
+            }
+
+            .email-widget-text {
+                writing-mode: initial;
+            }
+
+            .email-list-cards {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -161,6 +313,7 @@
                 <li><a href="index.html" class="nav-link active">Home</a></li>
                 <li><a href="equipment.html" class="nav-link">Equipment</a></li>
                 <li><a href="troubleshooting.html" class="nav-link">Troubleshooting</a></li>
+                <li><a href="pdf-resources.html" class="nav-link">PDF Resources</a></li>
             </ul>
             
         </div>
@@ -373,6 +526,12 @@
     
     <!-- Toast Container -->
     <div id="toastContainer" class="toast-container"></div>
+
+    <!-- Email Lists Widget - Fixed on right side -->
+    <div class="email-widget" onclick="showEmailListsModal()">
+        <div class="email-widget-icon">📧</div>
+        <div class="email-widget-text">Join Email Lists</div>
+    </div>
     
     <!-- Contact Form Modal -->
     <div id="contactFormModal" class="modal">
@@ -492,7 +651,104 @@
             </form>
         </div>
     </div>
-    
+
+    <!-- Email Lists Modal -->
+    <div id="emailListsModal" class="modal">
+        <div class="modal-backdrop" onclick="closeEmailListsModal()"></div>
+        <div class="modal-content" style="max-width: 800px;">
+            <div class="modal-header">
+                <h2 class="modal-title">NIC Email Lists</h2>
+                <button class="modal-close" onclick="closeEmailListsModal()">&times;</button>
+            </div>
+            <div class="modal-body" style="padding: 25px;">
+                <!-- Subscribe Section -->
+                <div class="email-list-section">
+                    <h3 style="color: var(--color-primary-blue); margin-bottom: 1rem; font-size: 1.2rem;">
+                        📥 How to Subscribe
+                    </h3>
+                    <div class="email-list-cards">
+                        <div class="email-list-card">
+                            <div class="email-list-title">NIC_ACTIVE</div>
+                            <div class="email-list-purpose">Active scanner users and announcements</div>
+                            <div class="email-list-instructions">
+                                Email to: <code>listserv@listserv.ucsf.edu</code><br>
+                                Body: <code>subscribe NIC_ACTIVE firstname lastname</code>
+                            </div>
+                            <button class="btn btn-sm btn-primary" onclick="composeSubscribeEmail('NIC_ACTIVE')">
+                                Compose Email
+                            </button>
+                        </div>
+
+                        <div class="email-list-card">
+                            <div class="email-list-title">NIC_CANCEL</div>
+                            <div class="email-list-purpose">Cancellation notifications</div>
+                            <div class="email-list-instructions">
+                                Email to: <code>listserv@listserv.ucsf.edu</code><br>
+                                Body: <code>subscribe NIC_CANCEL firstname lastname</code>
+                            </div>
+                            <button class="btn btn-sm btn-primary" onclick="composeSubscribeEmail('NIC_CANCEL')">
+                                Compose Email
+                            </button>
+                        </div>
+
+                        <div class="email-list-card">
+                            <div class="email-list-title">NIC-USERS</div>
+                            <div class="email-list-purpose">General user discussions</div>
+                            <div class="email-list-instructions">
+                                Email to: <code>listserv@listserv.ucsf.edu</code><br>
+                                Body: <code>subscribe NIC-USERS firstname lastname</code>
+                            </div>
+                            <button class="btn btn-sm btn-primary" onclick="composeSubscribeEmail('NIC-USERS')">
+                                Compose Email
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Post Section -->
+                <div class="email-list-section" style="margin-top: 2rem;">
+                    <h3 style="color: var(--color-primary-blue); margin-bottom: 1rem; font-size: 1.2rem;">
+                        ✉️ How to Post to Lists
+                    </h3>
+                    <div class="email-post-grid">
+                        <div class="email-post-item">
+                            <span class="email-post-label">NIC_ACTIVE:</span>
+                            <a href="mailto:NIC_ACTIVE@listserv.ucsf.edu" class="email-post-link">
+                                NIC_ACTIVE@listserv.ucsf.edu
+                            </a>
+                        </div>
+                        <div class="email-post-item">
+                            <span class="email-post-label">NIC_CANCEL:</span>
+                            <a href="mailto:NIC_CANCEL@listserv.ucsf.edu" class="email-post-link">
+                                NIC_CANCEL@listserv.ucsf.edu
+                            </a>
+                        </div>
+                        <div class="email-post-item">
+                            <span class="email-post-label">NIC-USERS:</span>
+                            <a href="mailto:NIC-USERS@listserv.ucsf.edu" class="email-post-link">
+                                NIC-USERS@listserv.ucsf.edu
+                            </a>
+                        </div>
+                        <div class="email-post-item">
+                            <span class="email-post-label">NIC_FMRI:</span>
+                            <a href="mailto:NIC_FMRI@listserv.ucsf.edu" class="email-post-link">
+                                NIC_FMRI@listserv.ucsf.edu
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Instructions Note -->
+                <div style="margin-top: 2rem; padding: 15px; background-color: #f0f8ff; border-left: 3px solid var(--color-electric-blue); border-radius: 5px;">
+                    <p style="margin: 0; color: #4A5568; font-size: 0.9rem;">
+                        <strong>Note:</strong> Replace "firstname lastname" with your actual name when subscribing.
+                        You'll receive a confirmation email after subscribing.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- EmailJS SDK -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     
@@ -511,11 +767,55 @@
                     stat.textContent = value;
                 }, 500);
             });
-            
+
             // Show welcome toast
             setTimeout(() => {
                 NeuroscapeApp.showToast('Welcome to Neuroscape Imaging Core', 'success');
             }, 1000);
+        });
+
+        // Email Lists Modal Functions
+        function showEmailListsModal() {
+            const modal = document.getElementById('emailListsModal');
+            if (modal) {
+                modal.classList.add('active');
+            }
+        }
+
+        function closeEmailListsModal() {
+            const modal = document.getElementById('emailListsModal');
+            if (modal) {
+                modal.classList.remove('active');
+            }
+        }
+
+        // Compose subscription email with pre-filled content
+        function composeSubscribeEmail(listName) {
+            const subject = `Subscribe to ${listName}`;
+            const body = `subscribe ${listName} firstname lastname`;
+
+            // Create mailto link
+            const mailtoLink = `mailto:listserv@listserv.ucsf.edu?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+            // Open email client
+            window.location.href = mailtoLink;
+
+            // Show reminder toast
+            setTimeout(() => {
+                if (typeof NeuroscapeApp !== 'undefined' && NeuroscapeApp.showToast) {
+                    NeuroscapeApp.showToast('Remember to replace "firstname lastname" with your actual name!', 'info');
+                }
+            }, 1000);
+        }
+
+        // Close modal on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const emailModal = document.getElementById('emailListsModal');
+                if (emailModal && emailModal.classList.contains('active')) {
+                    closeEmailListsModal();
+                }
+            }
         });
     </script>
 </body>
