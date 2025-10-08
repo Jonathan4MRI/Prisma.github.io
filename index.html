@@ -145,42 +145,88 @@
             }
         }
 
-        /* Email Widget Styles */
-        .email-widget {
-            position: fixed;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: linear-gradient(135deg, var(--color-primary-blue), var(--color-electric-blue));
-            color: white;
-            padding: 15px;
-            border-radius: 30px;
-            cursor: pointer;
+        /* Action Widgets Section */
+        .action-widgets {
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-            box-shadow: 0 4px 20px rgba(0, 102, 204, 0.3);
+            justify-content: center;
+            gap: 2rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+
+        .widget-card {
+            background: var(--color-clinical-white);
+            border: 1px solid var(--color-glass-border);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            min-width: 200px;
+            text-align: center;
+            cursor: pointer;
             transition: all 0.3s ease;
-            z-index: 1000;
-            writing-mode: vertical-rl;
-            text-orientation: mixed;
+            box-shadow: 0 2px 10px rgba(0, 102, 204, 0.05);
+            position: relative;
+            overflow: hidden;
         }
 
-        .email-widget:hover {
-            transform: translateY(-50%) translateX(-5px);
-            box-shadow: 0 6px 30px rgba(0, 102, 204, 0.5);
+        .widget-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--color-electric-blue), var(--color-medical-green));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
         }
 
-        .email-widget-icon {
-            font-size: 1.5rem;
-            writing-mode: initial;
+        .widget-card:hover::before {
+            transform: scaleX(1);
         }
 
-        .email-widget-text {
-            font-size: 0.9rem;
+        .widget-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 102, 204, 0.15);
+            border-color: var(--color-electric-blue);
+        }
+
+        .widget-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.75rem;
+            display: block;
+        }
+
+        .widget-title {
+            font-size: 1rem;
             font-weight: 600;
-            letter-spacing: 1px;
+            color: var(--color-primary-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .widget-description {
+            font-size: 0.85rem;
+            color: var(--color-text-secondary);
+            line-height: 1.4;
+        }
+
+        .widget-primary {
+            background: linear-gradient(135deg, rgba(0, 102, 204, 0.05), rgba(0, 217, 255, 0.05));
+        }
+
+        .widget-success {
+            background: linear-gradient(135deg, rgba(0, 200, 150, 0.05), rgba(0, 217, 255, 0.05));
+        }
+
+        .widget-info {
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.05), rgba(0, 102, 204, 0.05));
+        }
+
+        .widget-danger {
+            background: linear-gradient(135deg, rgba(255, 68, 68, 0.05), rgba(255, 165, 0, 0.05));
+        }
+
+        .widget-danger:hover {
+            border-color: var(--color-error-red);
         }
 
         /* Email List Modal Styles */
@@ -278,18 +324,12 @@
 
         /* Mobile responsive */
         @media (max-width: 768px) {
-            .email-widget {
-                writing-mode: initial;
-                flex-direction: row;
-                padding: 10px 15px;
-                bottom: 20px;
-                top: auto;
-                right: 20px;
-                transform: none;
+            .action-widgets {
+                gap: 1rem;
             }
 
-            .email-widget-text {
-                writing-mode: initial;
+            .widget-card {
+                min-width: 100%;
             }
 
             .email-list-cards {
@@ -329,31 +369,41 @@
         <!-- Hero Section -->
         <section class="hero-section">
             <h1 class="hero-title">NIC WIKI</h1>
-            
-            <!-- Search Bar -->
-            <div class="search-container">
+            <p class="hero-subtitle" style="color: #4A5568;">Siemens Prisma 3T</p>
+
+            <!-- Action Widgets - Front and Center -->
+            <div class="action-widgets">
+                <div class="widget-card widget-primary" onclick="openContactForm()">
+                    <span class="widget-icon">🔬</span>
+                    <div class="widget-title">Request Scanner Time</div>
+                    <div class="widget-description">Submit a request to use the NIC scanner</div>
+                </div>
+
+                <div class="widget-card widget-success" onclick="showEmailListsModal()">
+                    <span class="widget-icon">📧</span>
+                    <div class="widget-title">Join Email Lists</div>
+                    <div class="widget-description">Subscribe to NIC mailing lists</div>
+                </div>
+
+                <div class="widget-card widget-danger" onclick="showModal('emergencyModal')">
+                    <span class="widget-icon">🚨</span>
+                    <div class="widget-title">Emergency Procedures</div>
+                    <div class="widget-description">Critical safety protocols</div>
+                </div>
+            </div>
+
+            <!-- Search Bar - Moved below widgets -->
+            <div class="search-container" style="max-width: 600px; margin: 2rem auto;">
                 <div class="search-wrapper">
-                    <span class="search-icon">⚬</span>
-                    <input 
-                        type="text" 
-                        id="searchInput" 
-                        class="search-input" 
+                    <span class="search-icon">🔍</span>
+                    <input
+                        type="text"
+                        id="searchInput"
+                        class="search-input"
                         placeholder="Search equipment, procedures, troubleshooting... (Ctrl+K)"
                         autocomplete="off"
                     >
                 </div>
-            </div>
-            
-            <p class="hero-subtitle" style="color: #4A5568;">Siemens Prisma 3T</p>
-            
-            <!-- CTA Buttons -->
-            <div style="margin: 2rem 0; display: flex; flex-direction: column; align-items: center; gap: 1rem;">
-                <button class="btn btn-primary btn-lg" onclick="openContactForm()" style="font-size: 1.1rem; padding: 1rem 2rem; box-shadow: 0 6px 20px rgba(0, 102, 204, 0.3);">
-                    Want to scan at the NIC?
-                </button>
-                <button class="btn btn-danger" onclick="showModal('emergencyModal')" style="font-weight: 600; padding: 0.75rem 1.5rem; background: var(--color-error-red); border: none; box-shadow: 0 4px 15px rgba(255, 0, 0, 0.2);">
-                    🚨 EMERGENCY PROCEDURES
-                </button>
             </div>
             
             <!-- Quick Stats Removed -->
@@ -526,12 +576,6 @@
     
     <!-- Toast Container -->
     <div id="toastContainer" class="toast-container"></div>
-
-    <!-- Email Lists Widget - Fixed on right side -->
-    <div class="email-widget" onclick="showEmailListsModal()">
-        <div class="email-widget-icon">📧</div>
-        <div class="email-widget-text">Join Email Lists</div>
-    </div>
     
     <!-- Contact Form Modal -->
     <div id="contactFormModal" class="modal">

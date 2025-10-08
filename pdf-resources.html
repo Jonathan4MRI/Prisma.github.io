@@ -366,6 +366,9 @@
     <!-- Scripts -->
     <script src="js/main.js"></script>
     <script>
+        // Base URL for GitHub raw files
+        const GITHUB_RAW_BASE = "https://raw.githubusercontent.com/Jonathan4MRI/Prisma.github.io/main/PDFS_For_PIs/";
+
         // PDF data with categories and descriptions
         const pdfData = [
             {
@@ -503,6 +506,7 @@
         function createPDFCard(pdf) {
             const card = document.createElement('div');
             card.className = 'pdf-card';
+            const pdfUrl = GITHUB_RAW_BASE + pdf.filename;
             card.innerHTML = `
                 <div class="pdf-preview" onclick="previewPDF('${pdf.filename}', '${pdf.name}')">
                     <div class="pdf-preview-icon">📄</div>
@@ -513,10 +517,10 @@
                     <div class="pdf-description">${pdf.description}</div>
                     <div class="pdf-size">${pdf.size}</div>
                     <div class="pdf-actions">
-                        <button class="pdf-btn pdf-btn-preview" onclick="previewPDF('${pdf.filename}', '${pdf.name}')">
-                            👁 Preview
+                        <button class="pdf-btn pdf-btn-preview" onclick="window.open('${pdfUrl}', '_blank')">
+                            👁 View PDF
                         </button>
-                        <a href="PDFS_For_PIs/${pdf.filename}" download class="pdf-btn pdf-btn-download">
+                        <a href="${pdfUrl}" download="${pdf.filename}" class="pdf-btn pdf-btn-download">
                             📥 Download
                         </a>
                     </div>
@@ -561,13 +565,20 @@
             const frame = document.getElementById('pdfViewerFrame');
             const titleElement = document.getElementById('pdfViewerTitle');
 
+            const pdfUrl = GITHUB_RAW_BASE + filename;
+
             titleElement.textContent = title;
-            frame.src = `PDFS_For_PIs/${filename}`;
+
+            // Use Google Docs Viewer to embed PDFs from GitHub
+            // This works around CORS issues with GitHub raw URLs
+            const viewerUrl = `https://docs.google.com/viewer?url=${encodeURIComponent(pdfUrl)}&embedded=true`;
+            frame.src = viewerUrl;
+
             modal.classList.add('active');
 
-            // Show toast
+            // Show toast with alternative option
             if (typeof NeuroscapeApp !== 'undefined' && NeuroscapeApp.showToast) {
-                NeuroscapeApp.showToast('Opening PDF preview...', 'info');
+                NeuroscapeApp.showToast('Loading PDF... If preview fails, use the download button.', 'info');
             }
         }
 
@@ -586,9 +597,11 @@
         // Download current PDF
         function downloadCurrentPDF() {
             if (currentPDF) {
+                const pdfUrl = GITHUB_RAW_BASE + currentPDF;
                 const link = document.createElement('a');
-                link.href = `PDFS_For_PIs/${currentPDF}`;
+                link.href = pdfUrl;
                 link.download = currentPDF;
+                link.target = '_blank';
                 link.click();
 
                 if (typeof NeuroscapeApp !== 'undefined' && NeuroscapeApp.showToast) {
