@@ -1,0 +1,16 @@
+{   "id": "00cd6627-5406-4eec-ac53-5110471821d5",
+    "title": "The 932 fORP System",
+    "text": "Created by Chad Smiddy, last modified by Pierce, Elizabeth on May 01, 2023\n\nThe 932 fORP System consists of Handheld Devices, a Fiber Optic Bundle, and an Interface Unit. Contact staff for setting up new projects.\n\n[IMAGE_forp_image1]\n\n\n\n[IMAGE_forp_image2]\n\n\n\n[IMAGE_forp_image3]\n\nFunction:\n\nRecords subject responses while they are inside the MR scanner. It may also be used for testing and training in the MR console area prior to scanning.\n\nLocation:\n\nThe Handheld Button Box and Joystick is located in the MRI scanner room and their cable and the Fiber Optic Bundle may be brought out into the MR console area for practice and troubleshooting. The Interface Unit is in the Console room and is not permitted inside the MR scanner's room.\n\nSetup:\n\nSelecting Mode:\n\n[IMAGE_forp_image4]\n\nDescription:\nUse the knob on the front Panel of the 932 Interface Unit to select the MODE appropriate to your setup. Pushing the knob locks in the response and rotating the knob navigates the menu. To select the Mode perform the following:\n\n• Connect the device you'd like to use: Button Box or Joystick\n• The fORP should be left in the Default state which is HID NAR 12345 for the Button Box. The Button Box is usually connected.\n• Push the knob IN and select YES\n• Scroll down and select AUTOCONFIGURE\n• Scroll down and select HID NAR 12345. \n\n How to Reconfigure the fORP for the Button Box from the Joystick Mode:\n\nThese settings (FIU-005 HID NAR 12345) are for the Joystick so if you use the Button Box you must reconfigure the fORP.\n\n[IMAGE_forp_image5]\n\n• Push in the button on the fORP, then select Yes.\n\n[IMAGE_forp_image6]\n\n• With the device you'd like to use connected, select: AUTOCONFIGURE\n\n[IMAGE_forp_image7]\n\n• Scroll the knob to select HID NAR 12345 (the Trigger is a 5), with the Button Box connected you will see the Device Code (HHSC-1x4-L) on the fORP display.\n\nThe Button Box has a sticker on it with this Device Code; shown here.\n\n[IMAGE_forp_image8]\n\nMonitoring Responses:\n\nYou can use the LED Array on the front panel of the 932 Interface Unit to monitor subject’s responses and the scanner trigger pulse.\n\nConnections:\n\n[IMAGE_forp_image9]\n\n• The handheld device is connected to the fiber optic bundle.\n• The fiber optic bundle runs through the front waveguide and is connected to the Optical Port (P4) on the 932 Interface.\n• The 932 Interface Unit is connected to the presentation computer via a USB cable (P3) through a USB Hub and a KVM Switch.\n• The BNC cable is connected to the TTL TRIGGER Port (P6).\n\n[IMAGE_forp_image10]\n\n",
+    "images": [
+        "forp_image1.png",
+        "forp_image2.png",
+        "forp_image3.png",
+        "forp_image4.png",
+        "forp_image5.png",
+        "forp_image6.png",
+        "forp_image7.png",
+        "forp_image8.png",
+        "forp_image9.png",
+        "forp_image10.png"
+    ]
+}

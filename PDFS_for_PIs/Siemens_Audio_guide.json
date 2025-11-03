@@ -1,0 +1,9 @@
+{   "id":"e7ace279-f975-4a50-928f-71739652e51e",
+    "title": "Siemens Audio Systems Guide",
+    "text": "Created by Chad Smiddy, last modified on Jan 20, 2017\n\nMR compatible pneumatic sound system provided with the scanner did not arrive with headphones that would fit inside the 64-channel Head Coil, so we improvised these using a combination of the Old Trio and the New Prisma parts:\n\n[IMAGE_Sie_image1]\n\nFunction:\n\nPrimarily used to communicate with the subject, but could also be used to present simple tones during scanning.\n\nLocation:\n\nThe intercom is located in the Control room to the left of the Siemens Console Monitor. The headphones are usually coiled up at the foot end of the patient table and plug into the yellow connector.\n\nSetup:\n\nSoftware:\n\nThe setup is identical to Serene Sound Headphone. Just make sure that sound output is set to USB Audio.\n\nOperation:\n\n• Listening: Press the Listen button and adjust the volume using the increase/decrease adjacent buttons.\n• Talking: Press and hold the Speak button.\n• Presenting Audio: Make sure the CV/CBT switch is switched to CV and the ‘Music’ button is pressed.\n\nConnections:\n\n• The headphones are connected to the yellow opening at the foot of the patient bed.\n• The central intercom unit is connected to the USB sound card via a dual RCA to 1/8” audio cable.\n\nSiemens Audio Diagram:\n\n[IMAGE_Sie_image2]",
+    ]
+    "images": [
+        "Sie_image1.png",
+        "Sie_image2.jpg"
+    ]
+}

@@ -34,7 +34,7 @@
         
         .equipment-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
             gap: 2rem;
             margin: 2rem 0;
         }
@@ -67,7 +67,8 @@
         }
         
         .equipment-content {
-            padding: 1.5rem;
+            padding: 2rem;
+            min-height: 300px;
         }
         
         .equipment-name {
@@ -174,6 +175,16 @@
             border-color: var(--color-electric-blue);
             color: white;
         }
+
+        @media (max-width: 768px) {
+            .equipment-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .equipment-content {
+                padding: 1.5rem;
+            }
+        }
     </style>
 </head>
 <body data-theme="dark">
@@ -232,7 +243,23 @@
             <button class="filter-btn" data-filter="visual">Visual Systems</button>
             <button class="filter-btn" data-filter="audio">Audio Systems</button>
         </div>
-        
+
+        <!-- Equipment Best Practices -->
+        <section class="glass-card" style="margin-bottom: 2rem;">
+            <h2 style="color: black; margin-bottom: 1.5rem;">Equipment Best Practices</h2>
+            <ul style="list-style: disc; padding-left: 1.5rem; color: #2D3748;">
+                <li style="margin-bottom: 1rem;">
+                    <strong>fORP System:</strong> Please coil the button box cord and place it front left side of the scanner room. Make sure the buttons are face up.
+                </li>
+                <li style="margin-bottom: 1rem;">
+                    <strong>Prescription Glasses:</strong> If mix and matching lenses to match someone's prescription, please do not mix up the lenses and the bag!
+                </li>
+                <li style="margin-bottom: 1rem;">
+                    <strong>NNL Display System:</strong> Confirm with the participant that they can view the screen with the mirror system before placing them in the bore.
+                </li>
+            </ul>
+        </section>
+
         <!-- Equipment Grid -->
         <div class="equipment-grid">
             <!-- fORP System -->
@@ -258,14 +285,7 @@
                             <div class="wizard-step">Test responses before scan</div>
                         </div>
                     </div>
-                    <div class="equipment-actions">
-                        <a href="fORP - Neuroscape - Wiki@UCSF.html" class="btn btn-primary">
-                            View Full Guide
-                        </a>
-                        <button class="btn btn-secondary" onclick="NeuroscapeApp.showToast('Setup wizard launching...', 'info')">
-                            Setup Wizard
-                        </button>
-                    </div>
+                    <!-- Content expandable section for future details -->
                 </div>
             </div>
             
@@ -296,14 +316,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="equipment-actions">
-                        <a href="MRGlasses - Neuroscape - Wiki@UCSF.html" class="btn btn-primary">
-                            View Full Guide
-                        </a>
-                        <button class="btn btn-secondary" onclick="NeuroscapeApp.showToast('Calibration tool loading...', 'info')">
-                            Calibration Tool
-                        </button>
-                    </div>
+                    <!-- Content expandable section for future details -->
                 </div>
             </div>
             
@@ -338,14 +351,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="equipment-actions">
-                        <a href="Siemens Audio Systems Guide - Neuroscape - Wiki@UCSF.html" class="btn btn-primary">
-                            View Full Guide
-                        </a>
-                        <button class="btn btn-secondary" onclick="NeuroscapeApp.showToast('Audio test starting...', 'info')">
-                            Audio Test
-                        </button>
-                    </div>
+                    <!-- Content expandable section for future details -->
                 </div>
             </div>
             
@@ -369,34 +375,11 @@
                             Ensure mirror alignment is checked before each session. Misalignment can affect stimulus presentation quality.
                         </p>
                     </div>
-                    <div class="equipment-actions">
-                        <a href="NNL - Neuroscape - Wiki@UCSF.html" class="btn btn-primary">
-                            View Full Guide
-                        </a>
-                        <button class="btn btn-secondary" onclick="NeuroscapeApp.showToast('Alignment check initiated...', 'info')">
-                            Check Alignment
-                        </button>
-                    </div>
+                    <!-- Content expandable section for future details -->
                 </div>
             </div>
         </div>
-        
-        <!-- Tips Section -->
-        <section class="glass-card mt-xl">
-            <h2 style="color: black; margin-bottom: 1.5rem;">Equipment Best Practices</h2>
-            <ul style="list-style: disc; padding-left: 1.5rem; color: #2D3748;">
-                <li style="margin-bottom: 1rem;">
-                    <strong>fORP System:</strong> Please coil the button box cord and place it front left side of the scanner room. Make sure the buttons are face up.
-                </li>
-                <li style="margin-bottom: 1rem;">
-                    <strong>Prescription Glasses:</strong> If mix and matching lenses to match someone's prescription, please do not mix up the lenses and the bag!
-                </li>
-                <li style="margin-bottom: 1rem;">
-                    <strong>NNL Display System:</strong> Confirm with the participant that they can view the screen with the mirror system before placing them in the bore.
-                </li>
-            </ul>
-        </section>
-        
+
         <!-- Footer -->
         <footer class="glass-card mt-xl" style="text-align: center;">
             <div style="color: #4A5568;">
