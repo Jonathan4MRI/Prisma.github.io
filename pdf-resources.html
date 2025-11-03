@@ -366,11 +366,32 @@
     <!-- Scripts -->
     <script src="js/main.js"></script>
     <script>
-        // Base URL for GitHub raw files
-        const GITHUB_RAW_BASE = "https://raw.githubusercontent.com/Jonathan4MRI/Prisma.github.io/main/PDFS_For_PIs/";
+        // Base URL for PDF files (relative path)
+        const GITHUB_RAW_BASE = "./PDFS_for_PIs/";
 
         // PDF data with categories and descriptions
         const pdfData = [
+            {
+                name: "MRI Screening Form",
+                filename: "Screening_Form.pdf",
+                size: "1.1 MB",
+                category: "forms",
+                description: "Required safety screening form for all MRI participants"
+            },
+            {
+                name: "Map to NIC",
+                filename: "map_to_nic.pdf",
+                size: "514 KB",
+                category: "forms",
+                description: "General directions to the NIC facility"
+            },
+            {
+                name: "Map to NIC (Mission Bay)",
+                filename: "map_to_nic_mb.pdf",
+                size: "897 KB",
+                category: "forms",
+                description: "Directions to the NIC facility at Mission Bay"
+            },
             {
                 name: "AcqKnowledge Software Guide",
                 filename: "acqknowledge_software_guide.pdf",
@@ -426,27 +447,6 @@
                 size: "2.0 MB",
                 category: "software",
                 description: "LRO system documentation and user guide"
-            },
-            {
-                name: "Map to NIC (Mission Bay)",
-                filename: "map_to_nic_mb.pdf",
-                size: "897 KB",
-                category: "forms",
-                description: "Directions to the NIC facility at Mission Bay"
-            },
-            {
-                name: "Map to NIC",
-                filename: "map_to_nic.pdf",
-                size: "514 KB",
-                category: "forms",
-                description: "General directions to the NIC facility"
-            },
-            {
-                name: "MRI Screening Form",
-                filename: "Screening_Form.pdf",
-                size: "1.1 MB",
-                category: "forms",
-                description: "Required safety screening form for all MRI participants"
             },
             {
                 name: "SDK Documentation",
@@ -509,7 +509,7 @@
             const pdfUrl = GITHUB_RAW_BASE + pdf.filename;
             card.innerHTML = `
                 <div class="pdf-preview" onclick="previewPDF('${pdf.filename}', '${pdf.name}')">
-                    <div class="pdf-preview-icon">📄</div>
+                    <iframe src="${pdfUrl}#toolbar=0&navpanes=0&scrollbar=0" style="width: 100%; height: 100%; border: none; pointer-events: none;"></iframe>
                 </div>
                 <div class="pdf-info">
                     <div class="category-badge">${getCategoryLabel(pdf.category)}</div>
