@@ -295,7 +295,7 @@
                 <div class="equipment-content">
                     <h2 class="equipment-name">MRGlasses</h2>
                     <p class="equipment-description">
-                        Vision correction system designed specifically for MRI environments. 
+                        Vision correction system designed specifically for MRI environments.
                         Non-magnetic prescription lenses for participants requiring vision correction.
                     </p>
                     <div class="equipment-specs">
@@ -303,20 +303,17 @@
                         <span class="spec-badge">Non-Magnetic</span>
                         <span class="spec-badge">Adjustable</span>
                     </div>
-                    <div class="accordion">
-                        <div class="accordion-header" onclick="toggleAccordion(event)">
-                            <span class="accordion-title">Compatibility Chart</span>
-                            <span class="accordion-icon">▼</span>
-                        </div>
-                        <div class="accordion-content">
-                            <div class="accordion-body">
-                                <p>Compatible with all Siemens head coils</p>
-                                <p>Fits over most prescription frames</p>
-                                <p>Available in multiple sizes</p>
-                            </div>
-                        </div>
+
+                    <!-- Important Notice -->
+                    <div style="background: rgba(255, 71, 87, 0.1); border: 2px solid var(--color-error-red); border-radius: 0.5rem; padding: 1.5rem; margin: 1rem 0;">
+                        <p style="color: var(--color-error-red); font-weight: 600; font-size: 1rem; margin-bottom: 0.75rem;">⚠ IMPORTANT: Prescription Required</p>
+                        <p style="color: #2D3748; margin-bottom: 0.5rem; line-height: 1.6;">
+                            Make sure your participant knows their prescription ahead of the visit.
+                        </p>
+                        <p style="color: #4A5568; font-size: 0.9rem; font-style: italic;">
+                            Note: This only matters for task-based fMRI studies.
+                        </p>
                     </div>
-                    <!-- Content expandable section for future details -->
                 </div>
             </div>
             
@@ -326,32 +323,113 @@
                 <div class="equipment-content">
                     <h2 class="equipment-name">Siemens Audio System</h2>
                     <p class="equipment-description">
-                        High-fidelity audio delivery system with active noise cancellation. 
-                        Designed for clear communication and stimulus presentation during scans.
+                        MR-compatible pneumatic sound system for subject communication and audio stimulus presentation.
+                        Uses improvised headphones combining Old Trio and New Prisma components to fit the 64-channel Head Coil.
                     </p>
                     <div class="equipment-specs">
                         <span class="spec-badge">30dB Attenuation</span>
                         <span class="spec-badge">Pneumatic</span>
-                        <span class="spec-badge">Intercom</span>
+                        <span class="spec-badge">USB Audio</span>
                     </div>
-                    <div class="progress-container">
-                        <h3 style="color: var(--color-clinical-white); font-size: 1rem; margin-bottom: 1rem;">Safety Checklist</h3>
-                        <div class="progress-steps">
-                            <div class="progress-step completed">
-                                <div class="progress-circle">✓</div>
-                                <div class="progress-label">Volume Check</div>
-                            </div>
-                            <div class="progress-step active">
-                                <div class="progress-circle">2</div>
-                                <div class="progress-label">Patient Comfort</div>
-                            </div>
-                            <div class="progress-step">
-                                <div class="progress-circle">3</div>
-                                <div class="progress-label">Test Communication</div>
+
+                    <!-- System Overview -->
+                    <div class="accordion">
+                        <div class="accordion-header" onclick="toggleAccordion(event)">
+                            <span class="accordion-title">📍 System Locations</span>
+                            <span class="accordion-icon">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-body">
+                                <p style="margin-bottom: 0.75rem;"><strong>Intercom Unit:</strong> Control room, left of Siemens Console Monitor</p>
+                                <p style="margin-bottom: 0.75rem;"><strong>Headphones:</strong> Coiled at foot end of patient table</p>
+                                <p><strong>Connection:</strong> Yellow connector at foot of patient bed</p>
                             </div>
                         </div>
                     </div>
-                    <!-- Content expandable section for future details -->
+
+                    <!-- Setup Guide -->
+                    <div class="accordion">
+                        <div class="accordion-header" onclick="toggleAccordion(event)">
+                            <span class="accordion-title">⚙️ Setup Instructions</span>
+                            <span class="accordion-icon">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-body">
+                                <h4 style="color: var(--color-electric-blue); margin-bottom: 0.5rem;">Software Configuration</h4>
+                                <p style="margin-bottom: 1rem;">Setup is identical to Serene Sound Headphone. Ensure sound output is set to <strong>USB Audio</strong>.</p>
+
+                                <h4 style="color: var(--color-electric-blue); margin-bottom: 0.5rem;">Hardware Connections</h4>
+                                <ul style="list-style: disc; padding-left: 1.5rem; color: #2D3748;">
+                                    <li style="margin-bottom: 0.5rem;">Connect headphones to yellow opening at foot of patient bed</li>
+                                    <li>Connect central intercom unit to USB sound card via dual RCA to 1/8" audio cable</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Operation Guide -->
+                    <div class="accordion">
+                        <div class="accordion-header" onclick="toggleAccordion(event)">
+                            <span class="accordion-title">🎛️ How to Use</span>
+                            <span class="accordion-icon">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-body">
+                                <div style="background: rgba(0, 217, 255, 0.1); border-left: 3px solid var(--color-electric-blue); padding: 1rem; margin-bottom: 1rem; border-radius: 0.25rem;">
+                                    <p style="font-weight: 600; color: var(--color-electric-blue); margin-bottom: 0.5rem;">Listening to Subject</p>
+                                    <p style="color: #2D3748;">Press the <strong>Listen</strong> button and adjust volume using the increase/decrease buttons.</p>
+                                </div>
+
+                                <div style="background: rgba(0, 200, 150, 0.1); border-left: 3px solid var(--color-medical-green); padding: 1rem; margin-bottom: 1rem; border-radius: 0.25rem;">
+                                    <p style="font-weight: 600; color: var(--color-medical-green); margin-bottom: 0.5rem;">Talking to Subject</p>
+                                    <p style="color: #2D3748;">Press and hold the <strong>Speak</strong> button while communicating.</p>
+                                </div>
+
+                                <div style="background: rgba(255, 165, 0, 0.1); border-left: 3px solid var(--color-warning-amber); padding: 1rem; border-radius: 0.25rem;">
+                                    <p style="font-weight: 600; color: var(--color-warning-amber); margin-bottom: 0.5rem;">Presenting Audio Stimuli</p>
+                                    <p style="color: #2D3748;">Switch CV/CBT to <strong>CV</strong> and press the <strong>Music</strong> button.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Troubleshooting -->
+                    <div class="accordion">
+                        <div class="accordion-header" onclick="toggleAccordion(event)">
+                            <span class="accordion-title">🔧 Troubleshooting: Audio Not Working?</span>
+                            <span class="accordion-icon">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-body">
+                                <p style="color: #2D3748; margin-bottom: 1rem;">If you're experiencing audio issues, check these common solutions:</p>
+
+                                <!-- Photo placeholder 1 -->
+                                <div style="background: var(--color-light-gray); border: 2px dashed var(--color-glass-border); border-radius: 0.5rem; padding: 2rem; text-align: center; margin-bottom: 1rem;">
+                                    <div style="color: var(--color-text-secondary); font-size: 3rem; margin-bottom: 0.5rem;">📷</div>
+                                    <p style="color: var(--color-text-secondary); font-weight: 500;">Photo 1: Connection Check</p>
+                                    <p style="color: var(--color-text-light); font-size: 0.875rem;">Visual guide showing proper cable connections</p>
+                                </div>
+
+                                <!-- Photo placeholder 2 -->
+                                <div style="background: var(--color-light-gray); border: 2px dashed var(--color-glass-border); border-radius: 0.5rem; padding: 2rem; text-align: center; margin-bottom: 1rem;">
+                                    <div style="color: var(--color-text-secondary); font-size: 3rem; margin-bottom: 0.5rem;">📷</div>
+                                    <p style="color: var(--color-text-secondary); font-weight: 500;">Photo 2: Settings Verification</p>
+                                    <p style="color: var(--color-text-light); font-size: 0.875rem;">Visual guide showing correct software settings</p>
+                                </div>
+
+                                <div style="background: rgba(0, 102, 204, 0.05); border-radius: 0.5rem; padding: 1rem;">
+                                    <p style="color: #2D3748; font-weight: 500; margin-bottom: 0.5rem;">Quick Checklist:</p>
+                                    <ul style="list-style: none; padding-left: 0; color: #4A5568;">
+                                        <li style="margin-bottom: 0.5rem;">✓ Verify yellow connector is fully plugged in</li>
+                                        <li style="margin-bottom: 0.5rem;">✓ Confirm USB Audio is selected in software</li>
+                                        <li style="margin-bottom: 0.5rem;">✓ Check volume levels on intercom unit</li>
+                                        <li style="margin-bottom: 0.5rem;">✓ Ensure RCA cables are properly connected</li>
+                                        <li>✓ Test with "Listen" button before scan begins</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             
