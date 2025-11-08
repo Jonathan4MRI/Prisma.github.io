@@ -262,30 +262,24 @@
 
         <!-- Equipment Grid -->
         <div class="equipment-grid">
-            <!-- fORP System -->
-            <div class="equipment-card" data-category="response">
-                <div class="equipment-image">🎮</div>
+            <!-- Scheduling Guide -->
+            <div class="equipment-card" data-category="all" onclick="showModal('schedulingModal')" style="cursor: pointer;">
+                <div class="equipment-image">📅</div>
                 <div class="equipment-content">
-                    <h2 class="equipment-name">fORP System</h2>
+                    <h2 class="equipment-name">Scheduling Guide</h2>
                     <p class="equipment-description">
-                        Fiber-Optic Response Pad system for precise response collection during fMRI experiments. 
-                        MRI-compatible button box with minimal electromagnetic interference.
+                        Essential guidelines for booking scanner time at Neuroscape Imaging Core.
+                        Learn about notification lists, booking policies, and participant requirements.
                     </p>
                     <div class="equipment-specs">
-                        <span class="spec-badge">4 Buttons</span>
-                        <span class="spec-badge">USB Interface</span>
-                        <span class="spec-badge">MRI Safe</span>
+                        <span class="spec-badge">Email Lists</span>
+                        <span class="spec-badge">Booking Rules</span>
+                        <span class="spec-badge">Policies</span>
                     </div>
-                    <div class="setup-wizard">
-                        <h3 style="color: var(--color-medical-green); font-size: 1rem; margin-bottom: 0.5rem;">Quick Setup</h3>
-                        <div class="wizard-steps">
-                            <div class="wizard-step">Connect fiber optic bundle to scanner room port</div>
-                            <div class="wizard-step">Attach response pad to participant</div>
-                            <div class="wizard-step">Configure button mapping in software</div>
-                            <div class="wizard-step">Test responses before scan</div>
-                        </div>
+                    <div style="background: rgba(0, 217, 255, 0.1); border: 1px solid var(--color-electric-blue); border-radius: 0.5rem; padding: 1rem; margin-top: 1rem; text-align: center;">
+                        <p style="color: var(--color-electric-blue); font-weight: 600; margin-bottom: 0.5rem;">Click to View Guidelines</p>
+                        <p style="color: #4A5568; font-size: 0.875rem;">Complete scheduling instructions and policies</p>
                     </div>
-                    <!-- Content expandable section for future details -->
                 </div>
             </div>
             
@@ -334,7 +328,7 @@
 
                     <!-- System Overview -->
                     <div class="accordion">
-                        <div class="accordion-header" onclick="toggleAccordion(event)">
+                        <div class="accordion-header">
                             <span class="accordion-title">📍 System Locations</span>
                             <span class="accordion-icon">▼</span>
                         </div>
@@ -349,7 +343,7 @@
 
                     <!-- Setup Guide -->
                     <div class="accordion">
-                        <div class="accordion-header" onclick="toggleAccordion(event)">
+                        <div class="accordion-header">
                             <span class="accordion-title">⚙️ Setup Instructions</span>
                             <span class="accordion-icon">▼</span>
                         </div>
@@ -369,7 +363,7 @@
 
                     <!-- Operation Guide -->
                     <div class="accordion">
-                        <div class="accordion-header" onclick="toggleAccordion(event)">
+                        <div class="accordion-header">
                             <span class="accordion-title">🎛️ How to Use</span>
                             <span class="accordion-icon">▼</span>
                         </div>
@@ -395,7 +389,7 @@
 
                     <!-- Troubleshooting -->
                     <div class="accordion">
-                        <div class="accordion-header" onclick="toggleAccordion(event)">
+                        <div class="accordion-header">
                             <span class="accordion-title">🔧 Troubleshooting: Audio Not Working?</span>
                             <span class="accordion-icon">▼</span>
                         </div>
@@ -500,6 +494,82 @@
                     <ul style="list-style: disc; padding-left: 1.5rem;">
                         <li>Hit the <strong>emergency power off</strong></li>
                     </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scheduling Modal -->
+    <div id="schedulingModal" class="modal">
+        <div class="modal-backdrop" onclick="closeModal(event)"></div>
+        <div class="modal-content" style="max-width: 800px;">
+            <div class="modal-header">
+                <h2 class="modal-title">📅 Neuroscape Imaging Core Scheduling Guidelines</h2>
+                <button class="modal-close" onclick="closeModal(event)">×</button>
+            </div>
+            <div class="modal-body">
+                <div style="color: #2D3748;">
+                    <!-- Email Lists -->
+                    <div style="background: rgba(0, 217, 255, 0.1); border-left: 4px solid var(--color-electric-blue); padding: 1.5rem; margin-bottom: 1.5rem; border-radius: 0.5rem;">
+                        <h3 style="color: var(--color-electric-blue); margin-bottom: 1rem; font-size: 1.1rem;">1. Global Email Lists</h3>
+                        <p style="margin-bottom: 1rem; line-height: 1.6;">The Prisma has two global email lists:</p>
+                        <ul style="list-style: disc; padding-left: 1.5rem; margin-bottom: 1rem;">
+                            <li style="margin-bottom: 0.5rem;"><strong>NIC_Active</strong> - used for scanner announcements</li>
+                            <li style="margin-bottom: 0.5rem;"><strong>NIC_Cancel</strong> - used when a scheduled booking becomes available again</li>
+                        </ul>
+                        <p style="margin-bottom: 1rem; line-height: 1.6;">
+                            To get added to these Prisma's scheduling notification lists follow instructions at:<br>
+                            <a href="https://wiki.library.ucsf.edu/display/Neuro/Neuroscape+Scanner+Lists" target="_blank" style="color: var(--color-primary-blue); text-decoration: underline;">
+                                https://wiki.library.ucsf.edu/display/Neuro/Neuroscape+Scanner+Lists
+                            </a>
+                        </p>
+                        <p style="background: rgba(255, 165, 0, 0.15); padding: 1rem; border-radius: 0.5rem; line-height: 1.6;">
+                            <strong style="color: var(--color-warning-amber);">⚠ Important:</strong> Please send an email to <strong>NIC_CANCEL@listserv.ucsf.edu</strong> when you cancel bookings within 15 business days of the scheduled time so someone else may use that spot.
+                        </p>
+                    </div>
+
+                    <!-- Booking Requirements -->
+                    <div style="background: rgba(0, 200, 150, 0.1); border-left: 4px solid var(--color-medical-green); padding: 1.5rem; margin-bottom: 1.5rem; border-radius: 0.5rem;">
+                        <h3 style="color: var(--color-medical-green); margin-bottom: 1rem; font-size: 1.1rem;">2. Booking Requirements</h3>
+                        <p style="line-height: 1.6;">
+                            Do not schedule until you have a <strong>Participant lined up</strong> for the time slot you have selected or are ready to run a phantom. Holding spots without including participant specific anonymized ID in the Description while recruiting is <strong>not permitted</strong>.
+                        </p>
+                    </div>
+
+                    <!-- Collaboration -->
+                    <div style="background: rgba(102, 126, 234, 0.1); border-left: 4px solid #667eea; padding: 1.5rem; margin-bottom: 1.5rem; border-radius: 0.5rem;">
+                        <h3 style="color: #667eea; margin-bottom: 1rem; font-size: 1.1rem;">3. Researcher Collaboration</h3>
+                        <p style="line-height: 1.6;">
+                            It is appropriate to email other researchers and ask them if they can move a scan up or down the schedule slightly to make yours fit somewhere. Everyone tries to accommodate requests like that when possible.
+                        </p>
+                    </div>
+
+                    <!-- Testing and Training -->
+                    <div style="background: rgba(255, 165, 0, 0.1); border-left: 4px solid var(--color-warning-amber); padding: 1.5rem; margin-bottom: 1.5rem; border-radius: 0.5rem;">
+                        <h3 style="color: var(--color-warning-amber); margin-bottom: 1rem; font-size: 1.1rem;">4. Testing and Training Sessions</h3>
+                        <p style="margin-bottom: 1rem; line-height: 1.6;">
+                            Scheduling Types labeled as <strong>Testing</strong> and <strong>Training</strong> should include one of those words in the Description section.
+                        </p>
+                        <p style="line-height: 1.6;">
+                            Please schedule these either <strong>off hours</strong> or <strong>within 24 hours</strong> of the desired date/time. If scheduled further in advance, please yield to a participant booking if needed.
+                        </p>
+                    </div>
+
+                    <!-- Privacy Notice -->
+                    <div style="background: rgba(255, 71, 87, 0.1); border: 2px solid var(--color-error-red); border-radius: 0.5rem; padding: 1.5rem; margin-bottom: 1.5rem;">
+                        <p style="color: var(--color-error-red); font-weight: 600; margin-bottom: 0.5rem;">🔒 Privacy Notice</p>
+                        <p style="line-height: 1.6;">
+                            The above instructions are for scheduling on the Prisma's billing calendar. <strong>Do not include any ePHI, including initials</strong>, on this calendar as it is public.
+                        </p>
+                    </div>
+
+                    <!-- Participant Greeting -->
+                    <div style="background: rgba(0, 102, 204, 0.05); border-radius: 0.5rem; padding: 1.5rem;">
+                        <p style="color: var(--color-primary-blue); font-weight: 600; margin-bottom: 0.75rem;">📍 Note from NCRU</p>
+                        <p style="line-height: 1.6;">
+                            You or another team member are <strong>required to greet participants and their caregivers in the atrium</strong> of the building. Please be sure they have a way to reach you or another study member when they arrive.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
