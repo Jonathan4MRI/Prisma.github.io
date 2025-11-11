@@ -345,6 +345,9 @@
     </style>
 </head>
 <body data-theme="dark">
+    <!-- Skip to Main Content Link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="navbar-container">
@@ -363,7 +366,7 @@
         </div>
     </nav>
 
-    <div class="container">
+    <main id="main-content" class="container">
         <header style="margin-top: 80px;">
             <h1>Prisma Troubleshooting</h1>
             <p class="subtitle">Quick solutions to common problems</p>
@@ -375,7 +378,8 @@
         </header>
 
         <div class="search-container">
-            <svg class="search-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <label for="searchInput" class="sr-only">Search for a problem or error message</label>
+            <svg class="search-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                 <circle cx="11" cy="11" r="8"></circle>
                 <path d="M21 21l-4.35-4.35"></path>
             </svg>
@@ -651,7 +655,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="modal-title">Emergency Procedures</h2>
-                <button class="modal-close" onclick="closeModal(event)">×</button>
+                <button class="modal-close" onclick="closeModal(event)" aria-label="Close modal">×</button>
             </div>
             <div class="modal-body">
                 <div style="color: #2D3748;">
@@ -675,7 +679,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </main>
 
     <!-- Main JavaScript -->
     <script src="js/main.js"></script>

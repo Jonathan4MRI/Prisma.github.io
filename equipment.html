@@ -188,7 +188,9 @@
     </style>
 </head>
 <body data-theme="dark">
-    
+    <!-- Skip to Main Content Link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="navbar-container">
@@ -208,7 +210,7 @@
     </nav>
     
     <!-- Main Container -->
-    <div class="container">
+    <main id="main-content" class="container">
         <!-- Hero Section -->
         <div class="equipment-hero">
             <h1 class="equipment-title">Equipment Guides</h1>
@@ -225,11 +227,12 @@
         <!-- Search Bar -->
         <div class="search-container">
             <div class="search-wrapper">
-                <span class="search-icon">🔍</span>
-                <input 
-                    type="text" 
-                    id="searchInput" 
-                    class="search-input" 
+                <label for="searchInput" class="sr-only">Search equipment documentation</label>
+                <span class="search-icon" aria-hidden="true">🔍</span>
+                <input
+                    type="text"
+                    id="searchInput"
+                    class="search-input"
                     placeholder="Search equipment documentation..."
                     autocomplete="off"
                 >
@@ -481,7 +484,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="modal-title">Emergency Procedures</h2>
-                <button class="modal-close" onclick="closeModal(event)">×</button>
+                <button class="modal-close" onclick="closeModal(event)" aria-label="Close modal">×</button>
             </div>
             <div class="modal-body">
                 <div style="color: #2D3748;">
@@ -505,7 +508,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </main>
 
     <!-- Scripts -->
     <script src="js/main.js"></script>

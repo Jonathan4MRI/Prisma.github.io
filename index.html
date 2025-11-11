@@ -285,8 +285,11 @@
     </style>
 </head>
 <body data-theme="dark">
+    <!-- Skip to Main Content Link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <!-- Animated Background -->
-    
+
     <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="navbar-container">
@@ -311,7 +314,7 @@
     </div>
     
     <!-- Main Container -->
-    <div class="container">
+    <main id="main-content" class="container">
         <!-- Hero Section -->
         <section class="hero-section">
             <h1 class="hero-title">NIC WIKI</h1>
@@ -319,26 +322,26 @@
 
             <!-- Action Widgets - Front and Center -->
             <div class="action-widgets">
-                <div class="widget-card widget-info" onclick="showModal('schedulingModal')">
-                    <span class="widget-icon">📅</span>
+                <div class="widget-card widget-info" role="button" tabindex="0" aria-label="Scheduling Guidelines" onclick="showModal('schedulingModal')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showModal('schedulingModal');}">
+                    <span class="widget-icon" aria-hidden="true">📅</span>
                     <div class="widget-title">Scheduling Guidelines</div>
                     <div class="widget-description">Essential booking policies and requirements</div>
                 </div>
 
-                <div class="widget-card widget-primary" onclick="openContactForm()">
-                    <span class="widget-icon">🔬</span>
+                <div class="widget-card widget-primary" role="button" tabindex="0" aria-label="Request Scanner Time" onclick="openContactForm()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openContactForm();}">
+                    <span class="widget-icon" aria-hidden="true">🔬</span>
                     <div class="widget-title">Request Scanner Time</div>
                     <div class="widget-description">Submit a request to use the NIC scanner</div>
                 </div>
 
-                <div class="widget-card widget-success" onclick="showEmailListsModal()">
-                    <span class="widget-icon">📧</span>
+                <div class="widget-card widget-success" role="button" tabindex="0" aria-label="Join Email Lists" onclick="showEmailListsModal()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showEmailListsModal();}">
+                    <span class="widget-icon" aria-hidden="true">📧</span>
                     <div class="widget-title">Join Email Lists</div>
                     <div class="widget-description">Subscribe to NIC mailing lists</div>
                 </div>
 
-                <div class="widget-card widget-danger" onclick="showModal('emergencyModal')">
-                    <span class="widget-icon">🚨</span>
+                <div class="widget-card widget-danger" role="button" tabindex="0" aria-label="Emergency Procedures" onclick="showModal('emergencyModal')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showModal('emergencyModal');}">
+                    <span class="widget-icon" aria-hidden="true">🚨</span>
                     <div class="widget-title">Emergency Procedures</div>
                     <div class="widget-description">Critical safety protocols</div>
                 </div>
@@ -347,7 +350,8 @@
             <!-- Search Bar - Moved below widgets -->
             <div class="search-container" style="max-width: 600px; margin: 2rem auto;">
                 <div class="search-wrapper">
-                    <span class="search-icon">🔍</span>
+                    <label for="searchInput" class="sr-only">Search equipment, procedures, and troubleshooting</label>
+                    <span class="search-icon" aria-hidden="true">🔍</span>
                     <input
                         type="text"
                         id="searchInput"
@@ -377,26 +381,26 @@
         
         <!-- Main Categories Grid -->
         <div class="category-grid">
-            <div class="category-card" data-category="equipment" onclick="window.location.href='equipment.html'">
-                <div class="category-icon">▣</div>
+            <div class="category-card" data-category="equipment" role="button" tabindex="0" aria-label="Equipment Guides - 4 guides available" onclick="window.location.href='equipment.html'" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();window.location.href='equipment.html';}">
+                <div class="category-icon" aria-hidden="true">▣</div>
                 <h3 class="category-title">Equipment Guides</h3>
                 <p class="category-description">Technical documentation for MRI equipment, peripherals, and response systems. Includes setup procedures and calibration guides.</p>
                 <div style="margin-top: 1rem;">
                     <span style="color: var(--color-electric-blue); font-size: 0.875rem; font-weight: 500;">4 guides available →</span>
                 </div>
             </div>
-            
-            <div class="category-card" data-category="procedures" onclick="window.location.href='procedures.html'">
-                <div class="category-icon">▣</div>
+
+            <div class="category-card" data-category="procedures" role="button" tabindex="0" aria-label="Operating Procedures - 4 procedures documented" onclick="window.location.href='procedures.html'" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();window.location.href='procedures.html';}">
+                <div class="category-icon" aria-hidden="true">▣</div>
                 <h3 class="category-title">Operating Procedures</h3>
                 <p class="category-description">Standard operating procedures for scanner operations, data management, and facility protocols.</p>
                 <div style="margin-top: 1rem;">
                     <span style="color: var(--color-electric-blue); font-size: 0.875rem; font-weight: 500;">4 procedures documented →</span>
                 </div>
             </div>
-            
-            <div class="category-card" data-category="troubleshooting" onclick="window.location.href='troubleshooting.html'">
-                <div class="category-icon">⚠️</div>
+
+            <div class="category-card" data-category="troubleshooting" role="button" tabindex="0" aria-label="Troubleshooting - 7 common issues documented" onclick="window.location.href='troubleshooting.html'" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();window.location.href='troubleshooting.html';}">
+                <div class="category-icon" aria-hidden="true">⚠️</div>
                 <h3 class="category-title">Troubleshooting</h3>
                 <p class="category-description">Quick solutions for common MRI scanner issues, equipment problems, and patient-related challenges.</p>
                 <div style="margin-top: 1rem;">
@@ -404,8 +408,8 @@
                 </div>
             </div>
 
-            <div class="category-card" data-category="comfort" onclick="window.location.href='participant-comfort.html'">
-                <div class="category-icon">👤</div>
+            <div class="category-card" data-category="comfort" role="button" tabindex="0" aria-label="Participant Comfort Guide" onclick="window.location.href='participant-comfort.html'" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();window.location.href='participant-comfort.html';}">
+                <div class="category-icon" aria-hidden="true">👤</div>
                 <h3 class="category-title">Participant Comfort Guide</h3>
                 <p class="category-description">Essential tips and best practices for ensuring participant comfort and safety during MRI scans.</p>
                 <div style="margin-top: 1rem;">
@@ -448,7 +452,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="modal-title">Emergency Procedures</h2>
-                <button class="modal-close" onclick="closeModal(event)">×</button>
+                <button class="modal-close" onclick="closeModal(event)" aria-label="Close modal">×</button>
             </div>
             <div class="modal-body">
                 <div style="color: #2D3748;">
@@ -480,7 +484,7 @@
         <div class="modal-content" style="max-width: 800px;">
             <div class="modal-header">
                 <h2 class="modal-title">📅 Neuroscape Imaging Core Scheduling Guidelines</h2>
-                <button class="modal-close" onclick="closeModal(event)">×</button>
+                <button class="modal-close" onclick="closeModal(event)" aria-label="Close modal">×</button>
             </div>
             <div class="modal-body">
                 <div style="color: #2D3748;">
@@ -559,7 +563,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="modal-title">Emergency Contacts</h2>
-                <button class="modal-close" onclick="closeModal(event)">×</button>
+                <button class="modal-close" onclick="closeModal(event)" aria-label="Close modal">×</button>
             </div>
             <div class="modal-body">
                 <div class="accordion-group">
@@ -600,7 +604,7 @@
         <div class="modal-content" style="max-width: 700px;">
             <div class="modal-header">
                 <h2 class="modal-title">Request Scanner Time at NIC</h2>
-                <button class="modal-close" onclick="closeContactForm()">&times;</button>
+                <button class="modal-close" onclick="closeContactForm()" aria-label="Close modal">&times;</button>
             </div>
             <form id="scanRequestForm" class="scan-request-form">
                 <!-- Contact Information -->
@@ -720,7 +724,7 @@
         <div class="modal-content" style="max-width: 800px;">
             <div class="modal-header">
                 <h2 class="modal-title">NIC Email Lists</h2>
-                <button class="modal-close" onclick="closeEmailListsModal()">&times;</button>
+                <button class="modal-close" onclick="closeEmailListsModal()" aria-label="Close modal">&times;</button>
             </div>
             <div class="modal-body" style="padding: 25px;">
                 <!-- Subscribe Section -->
@@ -809,7 +813,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </main>
 
     <!-- EmailJS SDK -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
