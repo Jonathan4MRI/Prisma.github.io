@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>932 fORP System Setup Guide - Neuroscape Imaging Core</title>
+    <meta name="description" content="Complete setup guide for the 932 fORP (Fiber Optic Response Pad) system including handheld devices, configuration, and troubleshooting">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="shortcut icon" type="image/png" href="logo.png">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+
+    <style>
+        .guide-hero {
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.1), rgba(0, 200, 150, 0.1));
+            border-radius: 1rem;
+            padding: 3rem;
+            margin: 80px 0 2rem;
+            text-align: center;
+        }
+
+        .guide-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--color-primary-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .guide-subtitle {
+            font-size: 1.1rem;
+            color: var(--color-text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .author-info {
+            font-size: 0.875rem;
+            color: var(--color-text-secondary);
+            font-style: italic;
+        }
+
+        .guide-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .section {
+            background: var(--color-clinical-white);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--color-glass-border);
+            box-shadow: 0 2px 10px rgba(0, 102, 204, 0.05);
+        }
+
+        .section-title {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--color-primary-blue);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--color-electric-blue);
+        }
+
+        .section-subtitle {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--color-electric-blue);
+            margin: 1.5rem 0 1rem;
+        }
+
+        .info-box {
+            background: rgba(0, 217, 255, 0.1);
+            border-left: 4px solid var(--color-electric-blue);
+            padding: 1.25rem;
+            margin: 1.5rem 0;
+            border-radius: 0.5rem;
+        }
+
+        .warning-box {
+            background: rgba(255, 165, 0, 0.1);
+            border-left: 4px solid var(--color-warning-amber);
+            padding: 1.25rem;
+            margin: 1.5rem 0;
+            border-radius: 0.5rem;
+        }
+
+        .success-box {
+            background: rgba(0, 200, 150, 0.1);
+            border-left: 4px solid var(--color-medical-green);
+            padding: 1.25rem;
+            margin: 1.5rem 0;
+            border-radius: 0.5rem;
+        }
+
+        .component-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .component-card {
+            background: var(--color-glass-white);
+            border: 1px solid var(--color-glass-border);
+            border-radius: 0.75rem;
+            padding: 1.25rem;
+            text-align: center;
+        }
+
+        .component-image {
+            width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .component-name {
+            font-weight: 600;
+            color: var(--color-primary-blue);
+            font-size: 1.1rem;
+        }
+
+        .step-list {
+            counter-reset: step;
+            list-style: none;
+            padding: 0;
+        }
+
+        .step-list li {
+            position: relative;
+            padding-left: 3rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            color: var(--color-text-primary);
+        }
+
+        .step-list li::before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 2rem;
+            height: 2rem;
+            background: linear-gradient(135deg, var(--color-electric-blue), var(--color-medical-green));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .bullet-list {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+
+        .bullet-list li {
+            position: relative;
+            padding-left: 1.75rem;
+            margin-bottom: 0.75rem;
+            line-height: 1.6;
+            color: var(--color-text-primary);
+        }
+
+        .bullet-list li::before {
+            content: '•';
+            position: absolute;
+            left: 0.5rem;
+            color: var(--color-electric-blue);
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+
+        .diagram-container {
+            background: #f8f9fa;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            text-align: center;
+        }
+
+        .diagram-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .diagram-caption {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--color-text-secondary);
+            font-style: italic;
+        }
+
+        .port-list {
+            background: var(--color-glass-white);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .port-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem;
+            margin: 0.5rem 0;
+            background: white;
+            border-radius: 0.5rem;
+            border-left: 3px solid var(--color-electric-blue);
+        }
+
+        .port-label {
+            font-weight: 600;
+            color: var(--color-primary-blue);
+            min-width: 80px;
+        }
+
+        .port-description {
+            color: var(--color-text-secondary);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            gap: 1rem;
+        }
+
+        .toc {
+            background: var(--color-glass-white);
+            border: 1px solid var(--color-glass-border);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            position: sticky;
+            top: 80px;
+        }
+
+        .toc-title {
+            font-weight: 600;
+            color: var(--color-primary-blue);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .toc-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .toc-list li {
+            margin-bottom: 0.5rem;
+        }
+
+        .toc-list a {
+            color: var(--color-text-secondary);
+            text-decoration: none;
+            transition: color 0.2s ease;
+            display: block;
+            padding: 0.25rem 0;
+        }
+
+        .toc-list a:hover {
+            color: var(--color-electric-blue);
+        }
+
+        .layout-grid {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        @media (max-width: 968px) {
+            .layout-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .toc {
+                position: relative;
+                top: 0;
+            }
+
+            .guide-title {
+                font-size: 2rem;
+            }
+
+            .component-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .device-code {
+            background: #f8f9fa;
+            border: 2px solid var(--color-electric-blue);
+            border-radius: 0.5rem;
+            padding: 0.5rem 1rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: var(--color-primary-blue);
+            display: inline-block;
+            margin: 0.5rem 0;
+        }
+    </style>
+</head>
+<body data-theme="dark">
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="index.html" class="navbar-brand">
+                <div class="navbar-logo">NIC</div>
+                <span class="navbar-title">Neuroscape Imaging Core</span>
+            </a>
+
+            <ul class="navbar-nav">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="equipment.html" class="nav-link active">Equipment</a></li>
+                <li><a href="troubleshooting.html" class="nav-link">Troubleshooting</a></li>
+                <li><a href="pdf-resources.html" class="nav-link">PDF Resources</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Loading Indicator -->
+    <div id="loader" class="loader-container active">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="guide-container">
+        <!-- Hero Section -->
+        <section class="guide-hero">
+            <h1 class="guide-title">The 932 fORP System</h1>
+            <p class="guide-subtitle">Fiber Optic Response Pad - Complete Setup & Configuration Guide</p>
+            <p class="author-info">Created by Chad Smiddy | Last modified by Pierce, Elizabeth on May 01, 2023</p>
+        </section>
+
+        <div class="layout-grid">
+            <!-- Table of Contents -->
+            <aside class="toc">
+                <div class="toc-title">📋 Quick Navigation</div>
+                <ul class="toc-list">
+                    <li><a href="#overview">Overview</a></li>
+                    <li><a href="#components">System Components</a></li>
+                    <li><a href="#function">Function & Location</a></li>
+                    <li><a href="#setup">Setup Instructions</a></li>
+                    <li><a href="#mode-selection">Selecting Mode</a></li>
+                    <li><a href="#reconfigure">Reconfiguring Devices</a></li>
+                    <li><a href="#monitoring">Monitoring Responses</a></li>
+                    <li><a href="#connections">Connections</a></li>
+                </ul>
+            </aside>
+
+            <!-- Main Content -->
+            <main>
+                <!-- Overview Section -->
+                <section id="overview" class="section">
+                    <h2 class="section-title">Overview</h2>
+                    <p style="font-size: 1.1rem; line-height: 1.7; color: var(--color-text-primary);">
+                        The 932 fORP System consists of Handheld Devices, a Fiber Optic Bundle, and an Interface Unit.
+                        This system allows researchers to record subject responses while inside the MR scanner.
+                    </p>
+
+                    <div class="info-box">
+                        <strong style="color: var(--color-electric-blue);">📞 Need Help?</strong><br>
+                        Contact staff for assistance with setting up new projects or troubleshooting existing configurations.
+                    </div>
+                </section>
+
+                <!-- System Components -->
+                <section id="components" class="section">
+                    <h2 class="section-title">System Components</h2>
+
+                    <div class="component-grid">
+                        <div class="component-card">
+                            <img src="assets/forp_image1.imageset/image1.png" alt="fORP Handheld Button Box" class="component-image">
+                            <div class="component-name">Handheld Button Box</div>
+                        </div>
+
+                        <div class="component-card">
+                            <img src="assets/forp_image2.imageset/image2.png" alt="fORP Joystick" class="component-image">
+                            <div class="component-name">Joystick</div>
+                        </div>
+
+                        <div class="component-card">
+                            <img src="assets/forp_image3.imageset/image3.png" alt="fORP Interface Unit" class="component-image">
+                            <div class="component-name">Interface Unit</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Function & Location -->
+                <section id="function" class="section">
+                    <h2 class="section-title">Function & Location</h2>
+
+                    <div style="background: rgba(0, 200, 150, 0.05); border-radius: 0.75rem; padding: 1.5rem; margin-bottom: 1.5rem;">
+                        <h3 class="section-subtitle" style="margin-top: 0;">Function</h3>
+                        <p style="line-height: 1.7; color: var(--color-text-primary);">
+                            Records subject responses while they are inside the MR scanner. It may also be used for testing
+                            and training in the MR console area prior to scanning.
+                        </p>
+                    </div>
+
+                    <div style="background: rgba(0, 217, 255, 0.05); border-radius: 0.75rem; padding: 1.5rem;">
+                        <h3 class="section-subtitle" style="margin-top: 0;">Location</h3>
+                        <ul class="bullet-list">
+                            <li>The <strong>Handheld Button Box and Joystick</strong> are located in the MRI scanner room</li>
+                            <li>Their cable and the <strong>Fiber Optic Bundle</strong> may be brought out into the MR console area for practice and troubleshooting</li>
+                            <li>The <strong>Interface Unit</strong> is in the Console room and is <strong style="color: var(--color-warning-amber);">NOT permitted inside the MR scanner's room</strong></li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Setup Instructions -->
+                <section id="setup" class="section">
+                    <h2 class="section-title">Setup Instructions</h2>
+
+                    <!-- Mode Selection -->
+                    <div id="mode-selection">
+                        <h3 class="section-subtitle">Selecting Mode</h3>
+
+                        <div class="diagram-container">
+                            <img src="assets/forp_image4.imageset/image4.png" alt="fORP Interface Unit Front Panel" class="diagram-image">
+                            <p class="diagram-caption">fORP Interface Unit - Front Panel Controls</p>
+                        </div>
+
+                        <div class="info-box">
+                            <strong style="color: var(--color-electric-blue);">🎛️ Control Knob Operation:</strong><br>
+                            Use the knob on the front Panel of the 932 Interface Unit to select the MODE appropriate to your setup.
+                            <ul style="margin: 0.75rem 0 0 1.5rem;">
+                                <li style="margin-bottom: 0.5rem;"><strong>Pushing the knob</strong> locks in the response</li>
+                                <li><strong>Rotating the knob</strong> navigates the menu</li>
+                            </ul>
+                        </div>
+
+                        <h4 style="font-weight: 600; color: var(--color-primary-blue); margin: 1.5rem 0 1rem;">To Select the Mode:</h4>
+                        <ul class="step-list">
+                            <li>Connect the device you'd like to use: Button Box or Joystick</li>
+                            <li>The fORP should be left in the Default state which is <span class="device-code">HID NAR 12345</span> for the Button Box. The Button Box is usually connected.</li>
+                            <li>Push the knob IN and select <strong>YES</strong></li>
+                            <li>Scroll down and select <strong>AUTOCONFIGURE</strong></li>
+                            <li>Scroll down and select <strong>HID NAR 12345</strong></li>
+                        </ul>
+                    </div>
+
+                    <!-- Reconfiguration -->
+                    <div id="reconfigure" style="margin-top: 3rem;">
+                        <h3 class="section-subtitle">How to Reconfigure the fORP for the Button Box from the Joystick Mode</h3>
+
+                        <div class="warning-box">
+                            <strong style="color: var(--color-warning-amber);">⚠️ Important:</strong><br>
+                            These settings (<span class="device-code">FIU-005 HID NAR 12345</span>) are for the Joystick.
+                            If you use the Button Box you <strong>must reconfigure the fORP</strong>.
+                        </div>
+
+                        <div class="diagram-container">
+                            <img src="assets/forp_image5.imageset/image5.png" alt="fORP Push Button" class="diagram-image" style="max-width: 400px;">
+                            <p class="diagram-caption">Step 1: Push in the button on the fORP, then select Yes</p>
+                        </div>
+
+                        <ul class="step-list">
+                            <li>
+                                <strong>Push in the button</strong> on the fORP, then select <strong>YES</strong>
+                                <div class="diagram-container" style="margin-top: 1rem;">
+                                    <img src="assets/forp_image6.imageset/image6.png" alt="fORP Autoconfigure Menu" class="diagram-image" style="max-width: 400px;">
+                                </div>
+                            </li>
+                            <li>
+                                With the device you'd like to use connected, select: <strong>AUTOCONFIGURE</strong>
+                                <div class="diagram-container" style="margin-top: 1rem;">
+                                    <img src="assets/forp_image7.imageset/image7.png" alt="fORP Mode Selection" class="diagram-image" style="max-width: 400px;">
+                                </div>
+                            </li>
+                            <li>
+                                Scroll the knob to select <span class="device-code">HID NAR 12345</span> (the Trigger is a 5)
+                                <div class="success-box" style="margin-top: 1rem;">
+                                    ✓ With the Button Box connected you will see the Device Code <span class="device-code">HHSC-1x4-L</span> on the fORP display.
+                                </div>
+                            </li>
+                        </ul>
+
+                        <div class="info-box">
+                            <strong style="color: var(--color-electric-blue);">📝 Device Code Reference:</strong><br>
+                            The Button Box has a sticker on it with the Device Code shown below:
+                            <div class="diagram-container" style="margin-top: 1rem;">
+                                <img src="assets/forp_image8.imageset/image8.png" alt="Button Box Device Code Sticker" class="diagram-image" style="max-width: 300px;">
+                                <p class="diagram-caption">Device Code: HHSC-1x4-L</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Monitoring Responses -->
+                <section id="monitoring" class="section">
+                    <h2 class="section-title">Monitoring Responses</h2>
+                    <p style="line-height: 1.7; color: var(--color-text-primary);">
+                        You can use the <strong>LED Array</strong> on the front panel of the 932 Interface Unit to monitor
+                        subject's responses and the scanner trigger pulse in real-time.
+                    </p>
+
+                    <div class="success-box">
+                        <strong style="color: var(--color-medical-green);">💡 Pro Tip:</strong><br>
+                        The LED indicators provide immediate visual feedback, making it easy to verify that the system
+                        is properly receiving and processing responses during setup and testing.
+                    </div>
+                </section>
+
+                <!-- Connections -->
+                <section id="connections" class="section">
+                    <h2 class="section-title">Connections</h2>
+
+                    <div class="diagram-container">
+                        <img src="assets/forp_image9.imageset/image9.png" alt="fORP System Connections Diagram" class="diagram-image">
+                        <p class="diagram-caption">Complete fORP System Connection Diagram</p>
+                    </div>
+
+                    <div class="port-list">
+                        <h4 style="color: var(--color-primary-blue); margin-bottom: 1rem;">Connection Details:</h4>
+
+                        <div class="port-item">
+                            <span class="port-label">Step 1</span>
+                            <span class="port-description">The handheld device is connected to the fiber optic bundle</span>
+                        </div>
+
+                        <div class="port-item">
+                            <span class="port-label">Step 2</span>
+                            <span class="port-description">The fiber optic bundle runs through the front waveguide and is connected to the <strong>Optical Port (P4)</strong> on the 932 Interface</span>
+                        </div>
+
+                        <div class="port-item">
+                            <span class="port-label">Step 3</span>
+                            <span class="port-description">The 932 Interface Unit is connected to the presentation computer via a USB cable <strong>(P3)</strong> through a USB Hub and a KVM Switch</span>
+                        </div>
+
+                        <div class="port-item">
+                            <span class="port-label">Step 4</span>
+                            <span class="port-description">The BNC cable is connected to the <strong>TTL TRIGGER Port (P6)</strong></span>
+                        </div>
+                    </div>
+
+                    <div class="diagram-container">
+                        <img src="assets/forp_image10.imageset/image10.png" alt="fORP Rear Panel Connections" class="diagram-image">
+                        <p class="diagram-caption">fORP Interface Unit - Rear Panel Port Details</p>
+                    </div>
+                </section>
+
+                <!-- Navigation Buttons -->
+                <div class="navigation-buttons">
+                    <a href="equipment.html" class="btn btn-secondary">← Back to Equipment</a>
+                    <a href="troubleshooting.html" class="btn btn-primary">Troubleshooting Guide →</a>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script>
+        // Page-specific initialization
+        document.addEventListener('DOMContentLoaded', () => {
+            // Smooth scroll for TOC links
+            document.querySelectorAll('.toc-list a').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = link.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        // Update URL without jumping
+                        history.pushState(null, null, `#${targetId}`);
+                    }
+                });
+            });
+
+            // Highlight active section in TOC on scroll
+            const sections = document.querySelectorAll('section[id]');
+            const tocLinks = document.querySelectorAll('.toc-list a');
+
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (pageYOffset >= sectionTop - 100) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                tocLinks.forEach(link => {
+                    link.style.fontWeight = '400';
+                    link.style.color = 'var(--color-text-secondary)';
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.style.fontWeight = '600';
+                        link.style.color = 'var(--color-electric-blue)';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
